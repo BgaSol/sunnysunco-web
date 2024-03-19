@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <!--  字体 -->
+
+    <!--icon-->
+    <link rel='icon' type='image/svg+xml' href='/logo.jpg'/>
+    <style>
+        // 定义css颜色变量
+        html {
+            --loading-clolor: #1890ff;
+        }
+
+        @font-face {
+            font-family: "AlimamaAgileVF Thin";
+            src: url("/AlimamaAgileVF/AlimamaAgileVF-Thin.woff2") format("woff2"),
+            url("/AlimamaAgileVF/AlimamaAgileVF-Thin.woff") format("woff");
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "AlimamaShuHeiTi Bold";
+            src: url("/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold.woff2") format("woff2"),
+            url("/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold.woff") format("woff");
+            font-display: swap;
+        }
+
+        .init-loading {
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            width: 50px;
+            perspective: 200px;
+        }
+
+        .init-loading:before,
+        .init-loading:after {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            content: "";
+            animation: jumping 0.5s infinite alternate;
+            background: var(--loading-clolor)
+        }
+
+        .init-loading:before {
+            left: 0;
+        }
+
+        .init-loading:after {
+            right: 0;
+            animation-delay: 0.15s;
+        }
+
+        @keyframes jumping {
+            0% {
+                transform: scale(1) translateY(0px) rotateX(0deg);
+                box-shadow: 0 0 0 var(--loading-clolor);
+            }
+
+            100% {
+                transform: scale(1.2) translateY(-25px) rotateX(45deg);
+                background: var(--loading-clolor);
+                box-shadow: 0 25px 40px var(--loading-clolor);
+            }
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+<div id='app'>
+    <div class="init-loading"></div>
+</div>
+<script type='module' src='/src/main.ts'></script>
+</body>
+</html>

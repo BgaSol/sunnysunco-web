@@ -1,0 +1,27 @@
+//$--colors: (
+//        "primary": (
+//                "base": rgb(22, 86, 116),
+//        ),
+//        "success": (
+//                "base": rgb(108, 195, 187),
+//        ),
+//        "warning": (
+//                "base": rgb(102, 93, 198),
+//        ),
+//        "danger": (
+//                "base":rgb(163, 218, 214),
+//        ),
+//        "error": (
+//                "base": rgb(144, 144, 204),
+//        ),
+//        "info": (
+//                "base": rgb(124, 132, 140),
+//        ),
+//);
+
+//@forward "element-plus/theme-chalk/src/common/var.scss" with (
+//$colors: $--colors,
+//);
+//@use "element-plus/theme-chalk/src/common/var.scss";
+
+@use "element-plus/theme-chalk/src/common/var.scss";

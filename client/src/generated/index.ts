@@ -1,0 +1,73 @@
+/* generated using openapi-typescript-codegen -- do no edit */
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+export { ApiError } from './core/ApiError';
+export { CancelablePromise, CancelError } from './core/CancelablePromise';
+export { OpenAPI } from './core/OpenAPI';
+export type { OpenAPIConfig } from './core/OpenAPI';
+
+export { BaseVoClientPageEntity } from './models/BaseVoClientPageEntity';
+export { BaseVoDepartmentEntity } from './models/BaseVoDepartmentEntity';
+export { BaseVoFileEntity } from './models/BaseVoFileEntity';
+export { BaseVoImageEntity } from './models/BaseVoImageEntity';
+export { BaseVoInteger } from './models/BaseVoInteger';
+export { BaseVoListClientPageEntity } from './models/BaseVoListClientPageEntity';
+export { BaseVoListDepartmentEntity } from './models/BaseVoListDepartmentEntity';
+export { BaseVoListMenuEntity } from './models/BaseVoListMenuEntity';
+export { BaseVoListPermissionEntity } from './models/BaseVoListPermissionEntity';
+export { BaseVoListRoleEntity } from './models/BaseVoListRoleEntity';
+export { BaseVoListUserEntity } from './models/BaseVoListUserEntity';
+export { BaseVoListVerificationResult } from './models/BaseVoListVerificationResult';
+export { BaseVoObject } from './models/BaseVoObject';
+export { BaseVoPageVoClientPageEntity } from './models/BaseVoPageVoClientPageEntity';
+export { BaseVoPageVoImageEntity } from './models/BaseVoPageVoImageEntity';
+export { BaseVoPageVoLogEntity } from './models/BaseVoPageVoLogEntity';
+export { BaseVoPageVoTagEntity } from './models/BaseVoPageVoTagEntity';
+export { BaseVoPageVoUserEntity } from './models/BaseVoPageVoUserEntity';
+export { BaseVoRoleEntity } from './models/BaseVoRoleEntity';
+export { BaseVoSaTokenInfo } from './models/BaseVoSaTokenInfo';
+export { BaseVoTagEntity } from './models/BaseVoTagEntity';
+export { BaseVoUserEntity } from './models/BaseVoUserEntity';
+export { BaseVoVerificationVo } from './models/BaseVoVerificationVo';
+export type { ClientPageEntity } from './models/ClientPageEntity';
+export { ClientPagePageDto } from './models/ClientPagePageDto';
+export type { CreateClientPageDto } from './models/CreateClientPageDto';
+export type { CreateDepartmentDto } from './models/CreateDepartmentDto';
+export type { CreateFileDto } from './models/CreateFileDto';
+export type { CreateImageDto } from './models/CreateImageDto';
+export type { CreateRoleDto } from './models/CreateRoleDto';
+export type { CreateTagDto } from './models/CreateTagDto';
+export type { CreateUserDto } from './models/CreateUserDto';
+export type { DepartmentEntity } from './models/DepartmentEntity';
+export type { FileEntity } from './models/FileEntity';
+export type { ImageEntity } from './models/ImageEntity';
+export { ImagePageDto } from './models/ImagePageDto';
+export type { LogEntity } from './models/LogEntity';
+export type { LoginUserDto } from './models/LoginUserDto';
+export { LogPageDto } from './models/LogPageDto';
+export { MenuEntity } from './models/MenuEntity';
+export type { PageVoClientPageEntity } from './models/PageVoClientPageEntity';
+export type { PageVoImageEntity } from './models/PageVoImageEntity';
+export type { PageVoLogEntity } from './models/PageVoLogEntity';
+export type { PageVoTagEntity } from './models/PageVoTagEntity';
+export type { PageVoUserEntity } from './models/PageVoUserEntity';
+export type { PermissionEntity } from './models/PermissionEntity';
+export type { ResetUserPasswordDto } from './models/ResetUserPasswordDto';
+export type { RoleEntity } from './models/RoleEntity';
+export type { SaTokenInfo } from './models/SaTokenInfo';
+export type { TagEntity } from './models/TagEntity';
+export { TagPageDto } from './models/TagPageDto';
+export type { UpdateClientPageDto } from './models/UpdateClientPageDto';
+export type { UpdateDepartmentDto } from './models/UpdateDepartmentDto';
+export type { UpdateImageDto } from './models/UpdateImageDto';
+export type { UpdateRoleDto } from './models/UpdateRoleDto';
+export type { UpdateTagDto } from './models/UpdateTagDto';
+export type { UpdateUserDto } from './models/UpdateUserDto';
+export type { UpdateUserPasswordDto } from './models/UpdateUserPasswordDto';
+export type { UserEntity } from './models/UserEntity';
+export { UserPageDto } from './models/UserPageDto';
+export type { VerificationResult } from './models/VerificationResult';
+export type { VerificationVo } from './models/VerificationVo';
+
+export { Service } from './services/Service';

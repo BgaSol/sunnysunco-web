@@ -1,0 +1,38 @@
+package com.sunnysunco.cloud.business.base.dto;
+
+import com.sunnysunco.cloud.business.base.BaseEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+
+@Data()
+public abstract class BaseUpdateDto<ENTITY extends BaseEntity> {
+
+    @Schema(description = "主键")
+    @NotBlank(message = "主键不能为空")
+    private String id;
+
+    @Schema(description = "排序")
+    private Integer sort;
+
+    @Schema(description = "描述")
+    private String description;
+
+
+    /**
+     * CreateDto转Entity
+     *
+     * @return ENTITY
+     */
+    @Schema(hidden = true)
+    public abstract ENTITY toEntity();
+
+    @Schema(hidden = true)
+    public ENTITY toEntity(ENTITY entity) {
+        entity.setSort(this.sort);
+        entity.setDescription(this.description);
+        entity.setId(this.id);
+        return entity;
+    }
+}

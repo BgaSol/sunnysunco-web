@@ -1,0 +1,11 @@
+// we can add this to custom namespace, default is 'el'
+//@forward "element-plus/theme-chalk/src/mixins/config.scss" with (
+//  $namespace: "el"
+//);
+@use "./day.scss";
+
+@use "./dark.scss";
+
+@use 'element-plus/theme-chalk/src/message.scss';
+
+@use "element-plus/theme-chalk/src/dark/css-vars.scss";

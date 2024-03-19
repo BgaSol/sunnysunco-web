@@ -1,0 +1,69 @@
+server:
+  port: 8080
+  servlet:
+    #    context-path: /api
+    encoding:
+      charset: UTF-8
+      enabled: true
+  compression:
+    enabled: true # 启用压缩
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,image/jpeg,image/png # 压缩类型
+    min-response-size: 1024 # 最小压缩字节数
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: sunnysunco
+    jedis:
+      pool:
+        enabled: on
+        max-active: 200 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 100 # 连接池中的最大空闲连接
+        min-idle: 20 # 连接池中的最小空闲连接
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sunnysunco
+    username: sunnysunco
+    password: sunnysunco
+    hikari:
+      pool-name: MyHikariCP # 连接池名称
+      minimum-idle: 50 # 最小空闲连接数
+      maximum-pool-size: 1000 # 最大连接数
+      idle-timeout: 30000 # 空闲连接超时时间
+      max-lifetime: 2000000 # 连接最大存活时间
+      connection-timeout: 30000 # 连接超时时间
+      connection-test-query: SELECT 1 # 测试连接是否可用的查询语句
+  jpa:
+    open-in-view: on
+    generate-ddl: on
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 101MB
+springdoc:
+  swagger-ui:
+    enabled: true # 是否启用swagger-ui
+    path: /swagger-ui # swagger-ui地址
+  api-docs:
+    enabled: true # 是否启用swagger-api
+    path: /api-docs # swagger-api地址
+minio:
+  url: http://localhost:9000
+  username: sunnysunco
+  password: sunnysunco
+  bucket: sunnysunco
+logging:
+  level:
+    root: info
+#    org:
+#      springframework: debug
+#      hibernate:
+#        sql: debug
+#        type:
+#          descriptor:
+#            sql: trace

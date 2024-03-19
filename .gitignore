@@ -1,0 +1,8 @@
+.DS_Store
+
+docker
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
