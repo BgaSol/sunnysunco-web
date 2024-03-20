@@ -38,7 +38,6 @@ spring:
   jpa:
     open-in-view: on
     generate-ddl: on
-    show-sql: true
     hibernate:
       ddl-auto: update
   servlet:
@@ -52,21 +51,20 @@ springdoc:
   api-docs:
     enabled: true # 是否启用swagger-api
     path: /api-docs # swagger-api地址
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #mybatis日志记录器
 minio:
   url: http://localhost:9000
   username: sunnysunco
   password: sunnysunco
   bucket: sunnysunco
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   level:
     root: info
-#    org:
-#      springframework: debug
-#      hibernate:
-#        sql: debug
-#        type:
-#          descriptor:
-#            sql: trace
+    sql: debug #是否打印sql
+    org.apache.ibatis: ${logging.level.sql}
+    org.postgresql.jdbc: ${logging.level.sql}
+    org.mybatis: ${logging.level.sql}
+    com.baomidou.mybatisplus: ${logging.level.sql}
+    com.sunnysunco: ${logging.level.sql}

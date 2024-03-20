@@ -15,9 +15,9 @@ export type UpdateClientPageDto = {
      */
     sort?: number;
     /**
-     * 描述
+     * 页面描述
      */
-    description?: string;
+    description: string;
     /**
      * 页面名称
      */

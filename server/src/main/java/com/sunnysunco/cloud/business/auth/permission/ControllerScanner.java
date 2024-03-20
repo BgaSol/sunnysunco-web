@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Method;
 
 @Component
-@ComponentScan(basePackages = "cn.dwst")
+@ComponentScan(basePackages = "com.sunnysunco")
 @RequiredArgsConstructor
 public class ControllerScanner implements BeanPostProcessor {
 
