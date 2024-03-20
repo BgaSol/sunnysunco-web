@@ -2,7 +2,7 @@ package com.sunnysunco.cloud.business.information.file;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sunnysunco.cloud.business.base.BaseService;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.exception.BaseException;
 import com.sunnysunco.cloud.business.information.file.dto.CreateFileDto;
 import com.sunnysunco.cloud.config.minio.MinioConfig;
@@ -27,7 +27,7 @@ import java.security.NoSuchAlgorithmException;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class FileService extends BaseService<FileEntity, PageDto<FileEntity>> {
+public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>> {
     private final FileMapper fileMapper;
 
     private final FileRepository fileRepository;

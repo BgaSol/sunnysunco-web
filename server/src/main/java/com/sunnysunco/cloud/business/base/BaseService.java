@@ -2,7 +2,7 @@ package com.sunnysunco.cloud.business.base;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.exception.BaseException;
 import com.sunnysunco.cloud.business.base.vo.PageVo;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @Transactional
 @Slf4j
-public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends PageDto<ENTITY>> {
+public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends BasePageDto<ENTITY>> {
 
     abstract public BaseSCMapper<ENTITY> commonBaseMapper();
 

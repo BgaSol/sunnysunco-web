@@ -1,6 +1,6 @@
 package com.sunnysunco.cloud.business.information.log.dto;
 
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.information.log.LogEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "日志分页请求数据")
 @Data()
-public class LogPageDto extends PageDto<LogEntity> {
+public class LogPageDto extends BasePageDto<LogEntity> {
     @Schema(description = "用户名")
     private String username;
 

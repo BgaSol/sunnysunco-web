@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sunnysunco.cloud.business.auth.user.UserService;
 import com.sunnysunco.cloud.business.base.BaseService;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.information.image.ImageService;
 import io.minio.GetObjectResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class DepartmentService extends BaseService<DepartmentEntity, PageDto<DepartmentEntity>> {
+public class DepartmentService extends BaseService<DepartmentEntity, BasePageDto<DepartmentEntity>> {
     private final DepartmentMapper departmentMapper;
 
     private final DepartmentRepository departmentRepository;

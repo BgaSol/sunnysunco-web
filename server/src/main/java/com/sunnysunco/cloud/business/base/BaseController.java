@@ -2,7 +2,7 @@ package com.sunnysunco.cloud.business.base;
 
 import com.sunnysunco.cloud.business.base.dto.BaseCreateDto;
 import com.sunnysunco.cloud.business.base.dto.BaseUpdateDto;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import com.sunnysunco.cloud.business.base.vo.PageVo;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +14,7 @@ import java.util.List;
 @Validated
 public abstract class BaseController<
         ENTITY extends BaseEntity,
-        PAGEDTO extends PageDto<ENTITY>,
+        PAGEDTO extends BasePageDto<ENTITY>,
         CREATE_DTO extends BaseCreateDto<ENTITY>,
         UPDATE_DTO extends BaseUpdateDto<ENTITY>
         > {

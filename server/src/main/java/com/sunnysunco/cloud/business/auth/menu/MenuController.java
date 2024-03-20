@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.sunnysunco.cloud.business.auth.menu.dto.CreateMenuDto;
 import com.sunnysunco.cloud.business.auth.menu.dto.UpdateMenuDto;
 import com.sunnysunco.cloud.business.base.BaseController;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +21,7 @@ import java.util.List;
 @Validated
 public class MenuController extends BaseController<
         MenuEntity,
-        PageDto<MenuEntity>,
+        BasePageDto<MenuEntity>,
         CreateMenuDto,
         UpdateMenuDto> {
     private final MenuService menuService;

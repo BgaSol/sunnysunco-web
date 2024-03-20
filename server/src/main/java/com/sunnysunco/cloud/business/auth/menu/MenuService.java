@@ -3,7 +3,7 @@ package com.sunnysunco.cloud.business.auth.menu;
 import com.sunnysunco.cloud.business.auth.user.UserEntity;
 import com.sunnysunco.cloud.business.auth.user.UserService;
 import com.sunnysunco.cloud.business.base.BaseService;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class MenuService extends BaseService<MenuEntity, PageDto<MenuEntity>> {
+public class MenuService extends BaseService<MenuEntity, BasePageDto<MenuEntity>> {
     private final MenuMapper menuMapper;
 
     private final MenuRepository menuRepository;

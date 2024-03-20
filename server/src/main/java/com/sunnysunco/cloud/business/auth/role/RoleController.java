@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.sunnysunco.cloud.business.auth.role.dto.CreateRoleDto;
 import com.sunnysunco.cloud.business.auth.role.dto.UpdateRoleDto;
 import com.sunnysunco.cloud.business.base.BaseController;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,7 +22,7 @@ import java.util.List;
 @Validated
 public class RoleController extends BaseController<
         RoleEntity,
-        PageDto<RoleEntity>,
+        BasePageDto<RoleEntity>,
         CreateRoleDto,
         UpdateRoleDto> {
     private final RoleService roleService;

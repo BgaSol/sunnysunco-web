@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Data()
 @Schema(description = "分页查询参数")
-public abstract class PageDto<T extends BaseEntity> {
+public abstract class BasePageDto<T extends BaseEntity> {
     @NotNull(message = "页码不能为空")
     @Min(value = 1, message = "页码不能小于1")
     @Schema(description = "页码")

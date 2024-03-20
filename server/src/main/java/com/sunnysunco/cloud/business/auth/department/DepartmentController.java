@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.sunnysunco.cloud.business.auth.department.dto.CreateDepartmentDto;
 import com.sunnysunco.cloud.business.auth.department.dto.UpdateDepartmentDto;
 import com.sunnysunco.cloud.business.base.BaseController;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import io.minio.GetObjectResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,7 @@ import java.util.List;
 @Validated
 public class DepartmentController extends BaseController<
         DepartmentEntity,
-        PageDto<DepartmentEntity>,
+        BasePageDto<DepartmentEntity>,
         CreateDepartmentDto,
         UpdateDepartmentDto> {
     private final DepartmentService departmentService;

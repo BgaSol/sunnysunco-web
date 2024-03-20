@@ -1,7 +1,7 @@
 package com.sunnysunco.cloud.business.auth.clientpage.dto;
 
 import com.sunnysunco.cloud.business.auth.clientpage.ClientPageEntity;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "客户端自定义页面分页dto")
 @Data
-public class ClientPagePageDto extends PageDto<ClientPageEntity> {
+public class ClientPagePageDto extends BasePageDto<ClientPageEntity> {
     @Schema(description = "页面名称")
     private String name;
 

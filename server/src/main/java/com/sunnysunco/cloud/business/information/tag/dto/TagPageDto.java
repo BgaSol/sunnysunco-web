@@ -1,6 +1,6 @@
 package com.sunnysunco.cloud.business.information.tag.dto;
 
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.information.tag.TagEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(description = "标签分页实体类")
-public class TagPageDto extends PageDto<TagEntity> {
+public class TagPageDto extends BasePageDto<TagEntity> {
     @Schema(description = "标签名称")
     String name;
 

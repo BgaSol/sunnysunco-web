@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.sunnysunco.cloud.business.auth.permission.dto.CreatePermissionDto;
 import com.sunnysunco.cloud.business.auth.permission.dto.UpdatePermissionDto;
 import com.sunnysunco.cloud.business.base.BaseController;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/permission")
 public class PermissionController extends BaseController<
         PermissionEntity,
-        PageDto<PermissionEntity>,
+        BasePageDto<PermissionEntity>,
         CreatePermissionDto,
         UpdatePermissionDto> {
     private final PermissionService permissionService;

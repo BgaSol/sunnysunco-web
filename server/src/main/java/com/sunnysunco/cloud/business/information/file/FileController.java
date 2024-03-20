@@ -2,7 +2,7 @@ package com.sunnysunco.cloud.business.information.file;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.sunnysunco.cloud.business.base.BaseController;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import com.sunnysunco.cloud.business.information.file.dto.CreateFileDto;
 import com.sunnysunco.cloud.business.information.file.dto.UpdateFileDto;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 @RequestMapping("/file")
 public class FileController extends BaseController<
         FileEntity,
-        PageDto<FileEntity>,
+        BasePageDto<FileEntity>,
         CreateFileDto,
         UpdateFileDto> {
     private final FileService fileService;

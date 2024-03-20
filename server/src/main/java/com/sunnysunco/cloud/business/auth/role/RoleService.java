@@ -1,7 +1,7 @@
 package com.sunnysunco.cloud.business.auth.role;
 
 import com.sunnysunco.cloud.business.base.BaseService;
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class RoleService extends BaseService<RoleEntity, PageDto<RoleEntity>> {
+public class RoleService extends BaseService<RoleEntity, BasePageDto<RoleEntity>> {
     private final RoleMapper roleMapper;
 
     private final RoleRepository roleRepository;

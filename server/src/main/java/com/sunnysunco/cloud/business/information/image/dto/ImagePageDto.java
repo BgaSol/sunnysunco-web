@@ -1,6 +1,6 @@
 package com.sunnysunco.cloud.business.information.image.dto;
 
-import com.sunnysunco.cloud.business.base.dto.PageDto;
+import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.information.image.ImageEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(description = "图片分页查询参数")
-public class ImagePageDto extends PageDto<ImageEntity> {
+public class ImagePageDto extends BasePageDto<ImageEntity> {
     @Schema(description = "图片名称")
     String name;
 
