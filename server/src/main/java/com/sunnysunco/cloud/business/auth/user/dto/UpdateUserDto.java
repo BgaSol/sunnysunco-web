@@ -26,15 +26,10 @@ public class UpdateUserDto extends BaseUpdateDto<UserEntity> {
     private String nickname;
 
     @Schema(description = "邮箱")
-//    @Email(message = "邮箱格式不正确")
-//    @NotBlank(message = "邮箱不能为空")
     private String email;
 
     @Schema(description = "手机号")
     private String phone;
-
-    @Schema(description = "描述")
-    private String description;
 
     @NotNull
     @Schema(description = "账户锁定")
@@ -49,12 +44,10 @@ public class UpdateUserDto extends BaseUpdateDto<UserEntity> {
     @Override
     public UserEntity toEntity() {
         UserEntity user = new UserEntity();
-        user.setId(this.getId());
         user.setUsername(username);
         user.setNickname(nickname);
         user.setEmail(email);
         user.setPhone(phone);
-        user.setDescription(description);
         user.setLocked(locked);
         user.setDepartmentId(departmentId);
         if (ObjectUtils.isNotEmpty(departmentId)) {
@@ -71,6 +64,6 @@ public class UpdateUserDto extends BaseUpdateDto<UserEntity> {
             List<RoleEntity> collect = roleEntityStream.collect(Collectors.toList());
             user.setRoles(collect);
         }
-        return user;
+        return this.toEntity(user);
     }
 }

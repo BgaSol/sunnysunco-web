@@ -20,9 +20,6 @@ public class CreateDepartmentDto extends BaseCreateDto<DepartmentEntity> {
     @Schema(description = "部门名")
     private String name;
 
-    @Schema(description = "部门描述")
-    private String description;
-
     @Schema(description = "部门编码")
     private String code;
 
@@ -51,7 +48,6 @@ public class CreateDepartmentDto extends BaseCreateDto<DepartmentEntity> {
     public DepartmentEntity toEntity() {
         DepartmentEntity departmentEntity = new DepartmentEntity();
         departmentEntity.setName(name);
-        departmentEntity.setDescription(description);
         departmentEntity.setCode(code);
         departmentEntity.setDomain(domain);
         if (ObjectUtils.isNotEmpty(pageIds)) {
@@ -68,7 +64,6 @@ public class CreateDepartmentDto extends BaseCreateDto<DepartmentEntity> {
         departmentEntity.setHtml(html);
         departmentEntity.setIconId(iconId);
         departmentEntity.setParentId(parentId);
-        departmentEntity.setId(this.initId(departmentEntity));
-        return departmentEntity;
+        return this.toEntity(departmentEntity);
     }
 }

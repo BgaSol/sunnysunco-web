@@ -21,11 +21,12 @@ public class UpdateClientPageDto extends BaseUpdateDto<ClientPageEntity> {
     @NotBlank(message = "页面名称不能为空")
     private String name;
 
-    @Schema(description = "页面描述")
-    private String description;
-
     @Schema(description = "页面图片id列表")
     private List<String> imageIds;
+
+    @Schema(description = "页面描述")
+    @NotBlank(message = "页面描述不能为空")
+    private String description;
 
     @Schema(description = "页面HTML")
     private String html;

@@ -14,13 +14,13 @@ import java.util.List;
 @Validated
 public abstract class BaseController<
         ENTITY extends BaseEntity,
-        PAGEDTO extends BasePageDto<ENTITY>,
+        PAGE_DTO extends BasePageDto<ENTITY>,
         CREATE_DTO extends BaseCreateDto<ENTITY>,
         UPDATE_DTO extends BaseUpdateDto<ENTITY>
         > {
-    abstract public BaseService<ENTITY, PAGEDTO> commonBaseService();
+    abstract public BaseService<ENTITY, PAGE_DTO> commonBaseService();
 
-    public BaseVo<PageVo<ENTITY>> findByPage(@Valid PAGEDTO pageDto) {
+    public BaseVo<PageVo<ENTITY>> findByPage(@Valid PAGE_DTO pageDto) {
         PageVo<ENTITY> byPage = commonBaseService().findByPage(pageDto);
         return BaseVo.success(byPage);
     }

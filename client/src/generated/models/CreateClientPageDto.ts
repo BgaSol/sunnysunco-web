@@ -11,7 +11,7 @@ export type CreateClientPageDto = {
      */
     sort?: number;
     /**
-     * 页面描述
+     * 描述
      */
     description?: string;
     /**

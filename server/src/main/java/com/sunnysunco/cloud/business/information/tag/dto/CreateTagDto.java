@@ -35,6 +35,6 @@ public class CreateTagDto extends BaseCreateDto<TagEntity> {
         tagEntity.setStatus(status);
         tagEntity.setTagGroup(tagGroup);
         tagEntity.setType(type);
-        return super.toEntity(tagEntity);
+        return this.toEntity(tagEntity);
     }
 }

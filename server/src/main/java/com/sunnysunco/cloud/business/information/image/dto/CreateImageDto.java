@@ -24,7 +24,6 @@ public class CreateImageDto extends BaseCreateDto<ImageEntity> {
         ImageEntity imageEntity = new ImageEntity();
         imageEntity.setName(name);
         imageEntity.setFileId(fileId);
-        imageEntity.setId(this.initId(imageEntity));
-        return imageEntity;
+        return this.toEntity(imageEntity);
     }
 }

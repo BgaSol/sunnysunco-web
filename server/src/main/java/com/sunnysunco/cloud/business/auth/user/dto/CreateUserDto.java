@@ -37,9 +37,6 @@ public class CreateUserDto extends BaseCreateDto<UserEntity> {
     @Schema(description = "手机号")
     private String phone;
 
-    @Schema(description = "描述")
-    private String description;
-
     @NotNull
     @Schema(description = "账户锁定")
     private Boolean locked;
@@ -58,7 +55,6 @@ public class CreateUserDto extends BaseCreateDto<UserEntity> {
         user.setNickname(nickname);
         user.setEmail(email);
         user.setPhone(phone);
-        user.setDescription(description);
         user.setLocked(locked);
         if (ObjectUtils.isNotEmpty(departmentId)) {
             user.setDepartmentId(departmentId);
@@ -74,7 +70,6 @@ public class CreateUserDto extends BaseCreateDto<UserEntity> {
             List<RoleEntity> collect = roleEntityStream.collect(Collectors.toList());
             user.setRoles(collect);
         }
-        user.setId(this.initId(user));
-        return user;
+        return this.toEntity(user);
     }
 }

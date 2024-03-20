@@ -22,9 +22,6 @@ public class UpdateRoleDto extends BaseUpdateDto<RoleEntity> {
     @Schema(description = "角色名")
     private String name;
 
-    @Schema(description = "角色描述")
-    private String description;
-
     @NotBlank(message = "角色编码不能为空")
     @Schema(description = "角色编码")
     private String code;
@@ -38,9 +35,7 @@ public class UpdateRoleDto extends BaseUpdateDto<RoleEntity> {
     @Override
     public RoleEntity toEntity() {
         RoleEntity roleEntity = new RoleEntity();
-        roleEntity.setId(this.getId());
         roleEntity.setName(name);
-        roleEntity.setDescription(description);
         roleEntity.setCode(code);
         if (ObjectUtils.isNotEmpty(permissionIds)) {
             Stream<PermissionEntity> permissionEntityStream = permissionIds.stream().map((id) -> {
@@ -60,6 +55,6 @@ public class UpdateRoleDto extends BaseUpdateDto<RoleEntity> {
             List<MenuEntity> collect = menuEntityStream.collect(Collectors.toList());
             roleEntity.setMenus(collect);
         }
-        return roleEntity;
+        return this.toEntity(roleEntity);
     }
 }

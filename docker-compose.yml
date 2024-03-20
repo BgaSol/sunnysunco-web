@@ -1,6 +1,6 @@
 version: '3'
 networks:
-  sunnysunco-network-1:
+  sunnysunco-web-network:
     driver: bridge
 services:
   minio:
@@ -18,30 +18,7 @@ services:
       - ./docker/minio/data:/data
       - ./docker/minio/root/.minio:/root/.minio
     networks:
-      - sunnysunco-network-1
-  mysql:
-    restart: always
-    image: mysql:8
-    container_name: cloud-mysql
-    command:
-      - --default-authentication-plugin=mysql_native_password # 设置密码加密方式
-      - --character-set-server=utf8mb4 # 设置字符集
-      - --collation-server=utf8mb4_unicode_ci # 设置字符集
-      - --lower_case_table_names=1 # 表名大小写不敏感
-      - --explicit_defaults_for_timestamp # 时间戳默认值
-      - --default-time-zone=+8:00 # 时区
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: sunnysunco
-      MYSQL_USER: sunnysunco
-      MYSQL_PASSWORD: sunnysunco
-      TZ: Asia/Shanghai
-    ports:
-      - "3306:3306"
-    networks:
-      - sunnysunco-network-1
+      - sunnysunco-web-network
   redis:
     image: redis:6
     container_name: cloud-redis
@@ -54,4 +31,4 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - sunnysunco-network-1
+      - sunnysunco-web-network

@@ -11,7 +11,7 @@ export type CreateDepartmentDto = {
      */
     sort?: number;
     /**
-     * 部门描述
+     * 描述
      */
     description?: string;
     /**

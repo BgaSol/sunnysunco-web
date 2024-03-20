@@ -11,7 +11,7 @@ export type CreateRoleDto = {
      */
     sort?: number;
     /**
-     * 角色描述
+     * 描述
      */
     description?: string;
     /**

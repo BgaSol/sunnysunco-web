@@ -15,7 +15,7 @@ export type UpdateDepartmentDto = {
      */
     sort?: number;
     /**
-     * 部门描述
+     * 描述
      */
     description?: string;
     /**
