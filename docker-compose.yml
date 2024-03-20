@@ -5,7 +5,7 @@ networks:
 services:
   minio:
     image: minio/minio:RELEASE.2024-03-05T04-48-44Z
-    container_name: minio
+    container_name: sunnysunco-web-network-minio
     restart: always
     command: server /data --console-address ":9001"
     ports:
@@ -19,9 +19,26 @@ services:
       - ./docker/minio/root/.minio:/root/.minio
     networks:
       - sunnysunco-web-network
+  pgsql:
+    restart: always
+    image: postgres:16.2
+    #    shm_size: 256mb # 设置共享内存大小
+    container_name: sunnysunco-web-network-pgsql
+    environment:
+      POSTGRES_USER: sunnysunco
+      POSTGRES_PASSWORD: sunnysunco
+      POSTGRES_DB: sunnysunco
+      TZ: Asia/Shanghai
+    volumes:
+      - ./docker/pgsql/data:/var/lib/postgresql/data
+      - ./docker/pgsql/log:/var/log/postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - sunnysunco-web-network
   redis:
     image: redis:6
-    container_name: cloud-redis
+    container_name: sunnysunco-web-network-redis
     restart: always
     environment:
       TZ: Asia/Shanghai

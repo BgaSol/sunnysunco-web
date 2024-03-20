@@ -30,9 +30,9 @@ public abstract class BaseUpdateDto<ENTITY extends BaseEntity> {
 
     @Schema(hidden = true)
     public ENTITY toEntity(ENTITY entity) {
-        entity.setSort(this.sort);
-        entity.setDescription(this.description);
-        entity.setId(this.id);
+        entity.setSort(this.getSort());
+        entity.setDescription(this.getDescription());
+        entity.setId(this.getId());
         return entity;
     }
 }

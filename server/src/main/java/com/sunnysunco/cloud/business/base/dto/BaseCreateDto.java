@@ -30,8 +30,8 @@ public abstract class BaseCreateDto<ENTITY extends BaseEntity> {
      */
     @Schema(hidden = true)
     public ENTITY toEntity(ENTITY entity) {
-        entity.setSort(this.sort);
-        entity.setDescription(this.description);
+        entity.setSort(this.getSort());
+        entity.setDescription(this.getDescription());
         entity.setId(initId(entity));
         return entity;
     }
