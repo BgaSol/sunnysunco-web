@@ -57,6 +57,9 @@ minio:
   username: sunnysunco
   password: sunnysunco
   bucket: sunnysunco
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   level:
     root: info

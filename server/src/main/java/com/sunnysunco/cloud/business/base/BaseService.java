@@ -146,6 +146,12 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends Bas
                     throw new BaseException("获取字段值失败");
                 }
                 if ("".equals(value)) {
+                    try {
+                        field.set(entity, null);
+                    } catch (IllegalAccessException e) {
+                        log.error("设置字段值失败", e);
+                        throw new BaseException("设置字段值失败");
+                    }
                     updateWrapper.set(tableFieldName, null);
                 }
             }
