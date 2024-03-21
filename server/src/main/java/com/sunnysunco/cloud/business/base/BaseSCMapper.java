@@ -31,4 +31,7 @@ public interface BaseSCMapper<T> extends BaseMapper<T> {
     void deleteFromTable(@Param("tableName") String tableName,
                          @Param("masterName") String masterName,
                          @Param("id") String id);
+
+    @Delete("TRUNCATE TABLE ${tableName} CASCADE")
+    void truncateTable(@Param("tableName") String tableName);
 }

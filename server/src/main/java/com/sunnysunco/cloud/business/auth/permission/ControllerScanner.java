@@ -4,18 +4,19 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
 
 @Component
-@ComponentScan(basePackages = "com.sunnysunco")
+//@ComponentScan(basePackages = "com.sunnysunco")
 @RequiredArgsConstructor
+@Slf4j
 public class ControllerScanner implements BeanPostProcessor {
 
     private final PermissionMapper permissionMapper;
@@ -40,6 +41,7 @@ public class ControllerScanner implements BeanPostProcessor {
             String annotation = beanClass.getAnnotation(RequestMapping.class).value()[0];
             // 获取controller的名称
             String controllerName = annotation.startsWith("/") ? annotation.substring(1) : annotation;
+            log.info("正在扫描Controller: {}", controllerName);
             // 获取controller的描述
             String controllerDescription = controllerName + "Controller";
             if (beanClass.isAnnotationPresent(Tag.class)) {

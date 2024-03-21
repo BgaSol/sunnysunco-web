@@ -6,12 +6,14 @@ import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.exception.BaseException;
 import com.sunnysunco.cloud.business.base.vo.PageVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.JoinTable;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.criteria.Predicate;
 import java.lang.reflect.Field;
@@ -41,7 +43,7 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends Bas
         // 反射获取entity的所有字段
         Class<? extends BaseEntity> entityClass = entity.getClass();
 //        Field[] fields = entityClass.getDeclaredFields();
-        List<Field> fields = getAllFields(entityClass);
+        List<Field> fields = FieldUtils.getAllFieldsList(entityClass);
         // 检索所有的joinColumn字段为空字符串的字段，将其设置为null
         for (Field field : fields) {
             // 判断字段是否有注解Transient并且字段尾部是id结尾并且有TableField注解
@@ -49,7 +51,7 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends Bas
                     && field.getName().toLowerCase().endsWith("id")
                     && field.isAnnotationPresent(TableField.class)) {
                 // 获取TableField注解
-                TableField tableField = field.getAnnotation(TableField.class);
+//                TableField tableField = field.getAnnotation(TableField.class);
                 // 获取字段名
                 // String tableFieldName = tableField.value();
                 // 获取字段的值
@@ -122,7 +124,7 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends Bas
         }
         // 反射获取entity的所有字段
         Class<? extends BaseEntity> entityClass = entity.getClass();
-        List<Field> fields = getAllFields(entityClass);
+        List<Field> fields = FieldUtils.getAllFieldsList(entityClass);
         UpdateWrapper<ENTITY> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id", entity.getId());
         // 检索所有的joinColumn字段为空字符串的字段，将其设置为null
@@ -283,13 +285,14 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends Bas
         return commonBaseRepository().findAll();
     }
 
-    // 递归获取所有父类字段
-    public List<Field> getAllFields(Class<?> clazz) {
-        List<Field> fields = new ArrayList<>();
-        while (clazz != null) {
-            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
-            clazz = clazz.getSuperclass();
-        }
-        return fields;
+    /**
+     * 清空表内所有数据
+     */
+    public void truncateTable() {
+        Class<ENTITY> entityClass = this.commonBaseEntityClass();
+        String tableName = entityClass.getAnnotation(Table.class).name();
+        this.commonBaseMapper().truncateTable(tableName);
     }
+
+
 }

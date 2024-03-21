@@ -5,7 +5,7 @@ import com.sunnysunco.cloud.business.auth.permission.PermissionEntity;
 import com.sunnysunco.cloud.business.auth.role.RoleEntity;
 import com.sunnysunco.cloud.business.auth.user.UserEntity;
 import com.sunnysunco.cloud.business.auth.user.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ import java.util.Set;
  * todo 缓存未实现
  */
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class StpInterfaceImpl implements StpInterface {
 
