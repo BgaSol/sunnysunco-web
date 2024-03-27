@@ -27,9 +27,4 @@ public class LogService extends BaseService<LogEntity, LogPageDto> {
     public BaseRepository<LogEntity> commonBaseRepository() {
         return logRepository;
     }
-
-    @Override
-    public Class<LogEntity> commonBaseEntityClass() {
-        return LogEntity.class;
-    }
 }

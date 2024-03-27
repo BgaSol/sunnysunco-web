@@ -38,11 +38,6 @@ public class ClientPageService extends BaseService<ClientPageEntity, ClientPageP
         return clientPageRepository;
     }
 
-    @Override
-    public Class<ClientPageEntity> commonBaseEntityClass() {
-        return ClientPageEntity.class;
-    }
-
     @Transactional(readOnly = true)
     public List<ClientPageEntity> getMyClientPages(String domain) {
         DepartmentEntity myDepartment = departmentService.getMyDepartment(domain);

@@ -46,11 +46,6 @@ public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>
         return fileRepository;
     }
 
-    @Override
-    public Class<FileEntity> commonBaseEntityClass() {
-        return FileEntity.class;
-    }
-
     /**
      * 保存文件
      *

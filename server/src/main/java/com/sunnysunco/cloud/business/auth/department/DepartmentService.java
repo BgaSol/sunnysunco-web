@@ -36,11 +36,6 @@ public class DepartmentService extends BaseService<DepartmentEntity, BasePageDto
         return departmentRepository;
     }
 
-    @Override
-    public Class<DepartmentEntity> commonBaseEntityClass() {
-        return DepartmentEntity.class;
-    }
-
     /**
      * 获取当前登录用户的部门logo
      * 未登录则获取默认部门logo

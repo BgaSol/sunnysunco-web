@@ -24,8 +24,4 @@ public class PermissionService extends BaseService<PermissionEntity, BasePageDto
         return permissionRepository;
     }
 
-    @Override
-    public Class<PermissionEntity> commonBaseEntityClass() {
-        return PermissionEntity.class;
-    }
 }

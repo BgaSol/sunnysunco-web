@@ -42,11 +42,6 @@ public class UserService extends BaseService<UserEntity, UserPageDto> {
     }
 
     @Override
-    public Class<UserEntity> commonBaseEntityClass() {
-        return UserEntity.class;
-    }
-
-    @Override
     public Integer[] delete(String[] ids) {
         // 先删除用户
         Integer[] delete = super.delete(ids);

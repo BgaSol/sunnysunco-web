@@ -37,11 +37,6 @@ public class MenuService extends BaseService<MenuEntity, BasePageDto<MenuEntity>
     }
 
     @Override
-    public Class<MenuEntity> commonBaseEntityClass() {
-        return MenuEntity.class;
-    }
-
-    @Override
     public List<MenuEntity> findAll() {
         Specification<MenuEntity> example = (root, query, criteriaBuilder) -> {
             //用列表装载断言对象
@@ -71,9 +66,7 @@ public class MenuService extends BaseService<MenuEntity, BasePageDto<MenuEntity>
         List<MenuEntity> menus = menuRepository.findAll(example);
         UserEntity user = userService.getUserInfo();
         Set<String> menuIds = new HashSet<>();
-        user.getRoles().forEach(role -> role.getMenus().forEach(menu -> {
-            menuIds.add(menu.getId());
-        }));
+        user.getRoles().forEach(role -> role.getMenus().forEach(menu -> menuIds.add(menu.getId())));
         if (!user.getId().equals("admin")) {
             this.findChildMenu(menus, menuIds);
         }

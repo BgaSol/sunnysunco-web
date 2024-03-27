@@ -26,9 +26,4 @@ public class TableService extends BaseService<TableEntity, TablePageDto> {
     public BaseRepository<TableEntity> commonBaseRepository() {
         return tableRepository;
     }
-
-    @Override
-    public Class<TableEntity> commonBaseEntityClass() {
-        return TableEntity.class;
-    }
 }

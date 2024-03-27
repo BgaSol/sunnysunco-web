@@ -26,9 +26,4 @@ public class TableColumService extends BaseService<TableColumEntity, TableColumP
     public BaseRepository<TableColumEntity> commonBaseRepository() {
         return tableColumRepository;
     }
-
-    @Override
-    public Class<TableColumEntity> commonBaseEntityClass() {
-        return TableColumEntity.class;
-    }
 }

@@ -15,11 +15,6 @@ public class TagService extends BaseService<TagEntity, TagPageDto> {
     private final TagRepository tagRepository;
 
     @Override
-    public Class<TagEntity> commonBaseEntityClass() {
-        return TagEntity.class;
-    }
-
-    @Override
     public TagMapper commonBaseMapper() {
         return tagMapper;
     }

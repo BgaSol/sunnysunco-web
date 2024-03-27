@@ -17,19 +17,32 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.criteria.Predicate;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Transactional
 @Slf4j
-public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends BasePageDto<ENTITY>> {
+public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends BasePageDto<ENTITY>> {
 
     abstract public BaseSCMapper<ENTITY> commonBaseMapper();
 
     abstract public BaseRepository<ENTITY> commonBaseRepository();
 
-    abstract public Class<ENTITY> commonBaseEntityClass();
+    /**
+     * 获取ENTITY实体类的Class对象
+     *
+     * @return ENTITY实体类的Class对象
+     */
+    public Class<ENTITY> commonBaseEntityClass() {
+        Class<?> cls = getClass();
+        while (!cls.getSuperclass().equals(BaseService.class)) {
+            cls = cls.getSuperclass();
+        }
+        ParameterizedType type = (ParameterizedType) cls.getGenericSuperclass();
+        return (Class<ENTITY>) type.getActualTypeArguments()[0];
+    }
 
     /**
      * 保存实体
@@ -247,7 +260,7 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGEDTO extends Bas
      * @return 分页数据
      */
     @Transactional(readOnly = true)
-    public PageVo<ENTITY> findByPage(PAGEDTO pageDto) {
+    public PageVo<ENTITY> findByPage(PAGE_DTO pageDto) {
         // 获取分页条件
         Pageable pageAble = pageDto.getPageAble();
         // 获取查询条件

@@ -37,11 +37,6 @@ public class ImageService extends BaseService<ImageEntity, ImagePageDto> {
     }
 
     @Override
-    public Class<ImageEntity> commonBaseEntityClass() {
-        return ImageEntity.class;
-    }
-
-    @Override
     @Transactional
     public ImageEntity save(ImageEntity entity) {
         FileEntity file = fileService.findById(entity.getFileId());

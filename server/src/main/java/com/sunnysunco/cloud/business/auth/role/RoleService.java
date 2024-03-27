@@ -23,9 +23,4 @@ public class RoleService extends BaseService<RoleEntity, BasePageDto<RoleEntity>
     public RoleRepository commonBaseRepository() {
         return roleRepository;
     }
-
-    @Override
-    public Class<RoleEntity> commonBaseEntityClass() {
-        return RoleEntity.class;
-    }
 }
