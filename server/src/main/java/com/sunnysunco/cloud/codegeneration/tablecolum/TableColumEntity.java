@@ -2,6 +2,7 @@ package com.sunnysunco.cloud.codegeneration.tablecolum;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sunnysunco.cloud.business.base.BaseEntity;
 import com.sunnysunco.cloud.codegeneration.table.TableEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -42,6 +43,7 @@ public class TableColumEntity extends BaseEntity {
     @TableField(exist = false)
     @JoinColumn(name = "in_table_id")
     @ManyToOne()
+    @JsonIgnore()
     private TableEntity inTable;
 
     @Schema(description = "关联表ID")

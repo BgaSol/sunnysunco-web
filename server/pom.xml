@@ -24,6 +24,7 @@
         <!--        <mysql.version>8.3.0</mysql.version>-->
         <commons-exec.version>1.4.0</commons-exec.version>
         <postgresql.version>42.7.3</postgresql.version>
+        <freemarker.version>2.3.32</freemarker.version>
     </properties>
     <dependencies>
         <dependency>
@@ -72,6 +73,12 @@
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot-starter</artifactId>
             <version>${sa-token.version}</version>
+        </dependency>
+        <!--freemarker 模板引擎-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
         </dependency>
         <!-- Sa-Token 整合 Redis （使用 jackson 序列化方式） -->
         <dependency>

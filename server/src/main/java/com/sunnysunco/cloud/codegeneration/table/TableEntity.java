@@ -3,12 +3,15 @@ package com.sunnysunco.cloud.codegeneration.table;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.sunnysunco.cloud.business.base.BaseEntity;
+import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -37,4 +40,8 @@ public class TableEntity extends BaseEntity {
     @Column(name = "package_name")
     private String packageName;
 
+    @OneToMany(mappedBy = "inTable")
+    @Schema(description = "表内字段")
+    @TableField(exist = false)
+    private List<TableColumEntity> tableColumns;
 }
