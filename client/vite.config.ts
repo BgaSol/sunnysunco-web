@@ -44,14 +44,13 @@ export default defineConfig({
             '/api': {
                 target: 'http://localhost:8080',
                 changeOrigin: true,
-                rewrite: (p) => p.replace(/^\/api/, ''),
             },
         },
     },
-});
+})
 
 OpenAPI.generate({
-    input: "http://localhost:8080/api-docs",
+    input: "http://localhost:8080/api/api-docs",
     output: "./src/generated",
     httpClient: HttpClient.AXIOS,
 }).then(r => console.log("Generated OpenAPI client")).catch((e) => console.error(e))

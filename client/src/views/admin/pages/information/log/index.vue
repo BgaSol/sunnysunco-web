@@ -37,19 +37,20 @@ const {
   handleCurrentChange, handleSizeChange,
   resetPageData, search
 } = usePage(requestData, getTable);
+
 </script>
 
 <template>
   <div class='main'>
     <div class='filter-header'>
-      <el-form inline label-width="100">
-        <el-form-item label='用户' label-width="auto">
-          <el-input v-model='requestData.username' class="important-w-40" clearable placeholder='请输入用户'
+      <el-form inline>
+        <el-form-item label='用户' class="w-250px">
+          <el-input v-model='requestData.username' class="important-w-full" clearable placeholder='请输入用户'
                     @change="search">
           </el-input>
         </el-form-item>
-        <el-form-item label='客户端ip'>
-          <el-input v-model='requestData.ip' class="important-w-40" clearable placeholder='请输入客户端ip'
+        <el-form-item label='客户端ip' class="w-250px">
+          <el-input v-model='requestData.ip' class="important-w-full" clearable placeholder='请输入客户端ip'
                     @change="search">
           </el-input>
         </el-form-item>

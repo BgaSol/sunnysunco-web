@@ -48,31 +48,31 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
 <template>
   <div class='main'>
     <div class='filter-header'>
-      <el-form inline label-width="100">
-        <el-form-item label='用户名' label-width="auto">
-          <el-input v-model='requestData.username' class="important-w-40" clearable placeholder='请输入用户'
+      <el-form inline>
+        <el-form-item label='用户名' class="w-250px">
+          <el-input v-model='requestData.username' class="important-w-full" clearable placeholder='请输入用户'
                     @change="search">
           </el-input>
         </el-form-item>
-        <el-form-item label='昵称'>
-          <el-input v-model='requestData.nickname' class="important-w-40" clearable placeholder='请输入昵称'
+        <el-form-item label='昵称' class="w-250px">
+          <el-input v-model='requestData.nickname' class="important-w-full" clearable placeholder='请输入昵称'
                     @change="search">
           </el-input>
         </el-form-item>
-        <el-form-item label='邮箱'>
-          <el-input v-model='requestData.email' class="important-w-40" clearable placeholder='请输入邮箱'
+        <el-form-item label='邮箱' class="w-250px">
+          <el-input v-model='requestData.email' class="important-w-full" clearable placeholder='请输入邮箱'
                     @change="search">
           </el-input>
         </el-form-item>
-        <el-form-item label='账户锁定'>
-          <el-select v-model='requestData.locked' class="important-w-40" clearable placeholder='请选择'
+        <el-form-item label='账户锁定' class="w-250px">
+          <el-select v-model='requestData.locked' class="important-w-full" clearable placeholder='请选择'
                      @change="search">
             <el-option :value='false' label='启用'></el-option>
             <el-option :value='true' label='锁定'></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label='手机号' label-width="auto">
-          <el-input v-model='requestData.phone' class="important-w-40" clearable placeholder='请输入手机号'
+        <el-form-item label='手机号' class="w-250px">
+          <el-input v-model='requestData.phone' class="important-w-full" clearable placeholder='请输入手机号'
                     @change="search">
           </el-input>
         </el-form-item>

@@ -48,6 +48,7 @@ export const getMyDepartmentLogoUrl = () => {
 export const getMyClientPageImageUrl = (imageId: string) => {
     return `${BaseUrl}/client-page/getMyClientPageImage/${imageId}?${getHeadersString()}`
 }
+
 /**
  * 将 dto 中的 undefined 和 null 值去掉 替换为默认值 默认值一般为空字符串空数组等
  * 后端默认不更新 undefined 和 null 的值

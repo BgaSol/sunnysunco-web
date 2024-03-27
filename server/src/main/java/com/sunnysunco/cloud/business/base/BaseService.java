@@ -125,6 +125,10 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
     /**
      * 更新实体
      * 如果实体有中间表，也会更新中间表
+     * <p>
+     * 后端默认不更新 undefined 和 null 的值
+     * 使用默认更新时使用应在前端调用 buildDto
+     * 将 dto 中的 undefined 和 null 值去掉 替换为默认值 默认值一般为空字符串空数组等
      *
      * @param entity 实体
      * @return 实体

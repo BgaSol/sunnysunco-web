@@ -45,19 +45,19 @@ const {
 <template>
   <div class='main'>
     <div class='filter-header'>
-      <el-form inline label-width="100">
-        <el-form-item label='标签名称' label-width="auto">
-          <el-input v-model='requestData.name' class="important-w-40" clearable placeholder='请输入标签名称'
+      <el-form inline>
+        <el-form-item label='标签名称' class="w-250px">
+          <el-input v-model='requestData.name' class="important-w-full" clearable placeholder='请输入标签名称'
                     @change="search">
           </el-input>
         </el-form-item>
-        <el-form-item label='标签组'>
-          <el-input v-model='requestData.tagGroup' class="important-w-40" clearable placeholder='请输入标签组'
+        <el-form-item label='标签组' class="w-250px">
+          <el-input v-model='requestData.tagGroup' class="important-w-full" clearable placeholder='请输入标签组'
                     @change="search">
           </el-input>
         </el-form-item>
-        <el-form-item label='标签类型'>
-          <el-input v-model='requestData.type' class="important-w-40" clearable placeholder='请输入标签类型'
+        <el-form-item label='标签类型' class="w-250px">
+          <el-input v-model='requestData.type' class="important-w-full" clearable placeholder='请输入标签类型'
                     @change="search">
           </el-input>
         </el-form-item>

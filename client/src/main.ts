@@ -7,7 +7,7 @@ import "./api/HttpRequest";
 import App from './views/App.vue';
 import pinia from '~/pinia';
 import {initRouter} from '~/router';
-import ElementPlusIcons from '~/composables/element.plus.icons';
+import ElementPlusIcons from '~/composables/ElementPlusIcons';
 
 const app = createApp(App);
 app.use(pinia);
