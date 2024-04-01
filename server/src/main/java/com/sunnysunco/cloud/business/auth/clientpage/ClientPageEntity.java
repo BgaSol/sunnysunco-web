@@ -33,6 +33,7 @@ public class ClientPageEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     @TableField(exist = false)
     @OrderBy("createTime ASC")
+    @Schema(description = "页面图片列表")
     private List<ImageEntity> images;
 
     @Schema(description = "页面HTML")

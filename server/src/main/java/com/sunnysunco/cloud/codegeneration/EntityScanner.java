@@ -5,13 +5,12 @@ import com.sunnysunco.cloud.business.base.exception.BaseException;
 import com.sunnysunco.cloud.codegeneration.table.TableEntity;
 import com.sunnysunco.cloud.codegeneration.table.TableMapper;
 import com.sunnysunco.cloud.codegeneration.table.TableService;
-import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumEntity;
-import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumService;
+import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumnEntity;
+import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumnService;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -23,7 +22,6 @@ import javax.persistence.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Set;
 
 @Component
@@ -32,7 +30,7 @@ import java.util.Set;
 public class EntityScanner implements ApplicationRunner {
     private final TableService tableService;
 
-    private final TableColumService tableColumService;
+    private final TableColumnService tableColumnService;
 
     private final TableMapper tableMapper;
 
@@ -43,7 +41,7 @@ public class EntityScanner implements ApplicationRunner {
 
     public void scanEntities() {
         // 清空表结构记录
-        tableColumService.truncateTable();
+        tableColumnService.truncateTable();
         tableService.truncateTable();
         // 扫描所有entity类
         String basePackage = "com.sunnysunco";
@@ -63,9 +61,7 @@ public class EntityScanner implements ApplicationRunner {
             log.error("未找到类", e);
             throw new BaseException("未找到类");
         }
-        boolean isEntity = entityClass.isAnnotationPresent(Entity.class)
-                && entityClass.isAnnotationPresent(Table.class)
-                && entityClass.isAnnotationPresent(Schema.class);
+        boolean isEntity = entityClass.isAnnotationPresent(Entity.class) && entityClass.isAnnotationPresent(Table.class) && entityClass.isAnnotationPresent(Schema.class);
         if (isEntity) {
             // 获取类的详细信息
             TableEntity tableEntity = getTableEntityByClass(entityClass);
@@ -74,82 +70,77 @@ public class EntityScanner implements ApplicationRunner {
             }
             log.info("正在扫描Entity: {}", tableEntity.getEntityName());
             // 获取所有字段
-            List<Field> allFieldsList = FieldUtils.getAllFieldsList(entityClass);
+            Field[] allFieldsList = entityClass.getDeclaredFields();
             for (Field field : allFieldsList) {
-                boolean fieldIsTableColum = field.isAnnotationPresent(Column.class)
-                        || field.isAnnotationPresent(ManyToMany.class)
-                        || field.isAnnotationPresent(ManyToOne.class)
-                        || field.isAnnotationPresent(OneToMany.class)
-                        || field.isAnnotationPresent(OneToOne.class);
+                boolean fieldIsTableColum = field.isAnnotationPresent(Column.class) || field.isAnnotationPresent(ManyToMany.class) || field.isAnnotationPresent(ManyToOne.class) || field.isAnnotationPresent(OneToMany.class) || field.isAnnotationPresent(OneToOne.class);
                 if (fieldIsTableColum) {
-                    TableColumEntity tableColumEntity = getTableColumEntityByClass(field, entityClass, tableEntity);
-                    tableColumService.save(tableColumEntity);
+                    TableColumnEntity tableColumnEntity = getTableColumEntityByClass(field, entityClass, tableEntity);
+                    tableColumnService.save(tableColumnEntity);
                 }
             }
-            TableColumEntity tableColumEntity = new TableColumEntity();
-            tableColumEntity.setInTableId(tableEntity.getId());
+            TableColumnEntity tableColumnEntity = new TableColumnEntity();
+            tableColumnEntity.setInTableId(tableEntity.getId());
         }
     }
 
-    private TableColumEntity getTableColumEntityByClass(Field field, Class<?> entityClass, TableEntity tableEntity) {
+    private TableColumnEntity getTableColumEntityByClass(Field field, Class<?> entityClass, TableEntity tableEntity) {
 
-        TableColumEntity tableColumEntity = new TableColumEntity();
+        TableColumnEntity tableColumnEntity = new TableColumnEntity();
 
-        tableColumEntity.setInTableId(tableEntity.getId());
-        tableColumEntity.setEntityColumName(field.getName());
+        tableColumnEntity.setInTableId(tableEntity.getId());
+        tableColumnEntity.setEntityColumnName(field.getName());
 
         if (field.isAnnotationPresent(Column.class)) {
             String name = field.getAnnotation(Column.class).name();
-            tableColumEntity.setTableColumName(name);
+            tableColumnEntity.setTableColumnName(name);
+        }
+        if (field.isAnnotationPresent(Schema.class)) {
+            String schemaDescription = field.getAnnotation(Schema.class).description();
+            tableColumnEntity.setDescription(schemaDescription);
         }
 
         Boolean isToMany = null;
         if (field.isAnnotationPresent(ManyToMany.class)) {
-            tableColumEntity.setAssociationMethod("ManyToMany");
+            tableColumnEntity.setAssociationMethod("ManyToMany");
             isToMany = true;
         } else if (field.isAnnotationPresent(OneToMany.class)) {
-            tableColumEntity.setAssociationMethod("OneToMany");
+            tableColumnEntity.setAssociationMethod("OneToMany");
             isToMany = true;
         } else if (field.isAnnotationPresent(ManyToOne.class)) {
-            tableColumEntity.setAssociationMethod("ManyToOne");
+            tableColumnEntity.setAssociationMethod("ManyToOne");
             isToMany = false;
         } else if (field.isAnnotationPresent(OneToOne.class)) {
-            tableColumEntity.setAssociationMethod("OneToOne");
+            tableColumnEntity.setAssociationMethod("OneToOne");
             isToMany = false;
+        } else {
+            Class<?> type = field.getType();
+            // 保存类型的class名
+            tableColumnEntity.setType(type.getSimpleName());
         }
         if (ObjectUtils.isNotEmpty(isToMany)) {
             Class<?> associatedClass;
             if (isToMany) {
-                tableColumEntity.setIsMaster(field.isAnnotationPresent(JoinTable.class));
+                tableColumnEntity.setIsMaster(field.isAnnotationPresent(JoinTable.class));
 
                 // 获取关联表类型
                 ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
                 Type[] typeArguments = parameterizedType.getActualTypeArguments();
                 Type typeArgument = typeArguments[0];
-                try {
-                    associatedClass = (Class<?>) typeArgument;
-                } catch (RuntimeException e) {
-                    associatedClass = entityClass;
-                }
+                associatedClass = (Class<?>) typeArgument;
             } else {
-                tableColumEntity.setIsMaster(field.isAnnotationPresent(JoinColumn.class));
+                tableColumnEntity.setIsMaster(field.isAnnotationPresent(JoinColumn.class));
                 // 获取关联表类型
-                Class<?> type = field.getType();
-                if (type.isAssignableFrom(BaseTreeEntity.class)) {
-                    associatedClass = entityClass;
-                } else {
-                    associatedClass = type;
-                }
+                associatedClass = field.getType();
             }
             // 设置关联表类型
             TableEntity associatedTableEntity = getTableEntityByClass(associatedClass);
             if (tableMapper.selectById(associatedTableEntity.getId()) == null) {
                 tableService.save(associatedTableEntity);
             }
-            tableColumEntity.setAssociatedTableId(associatedTableEntity.getId());
+            tableColumnEntity.setAssociatedTableId(associatedTableEntity.getId());
         }
-        tableColumEntity.setId(tableEntity.getId() + " " + tableColumEntity.getEntityColumName());
-        return tableColumEntity;
+        tableColumnEntity.setId(tableEntity.getId() + " " + tableColumnEntity.getEntityColumnName());
+        return tableColumnEntity;
     }
 
     private static TableEntity getTableEntityByClass(Class<?> entityClass) {
@@ -158,12 +149,14 @@ public class EntityScanner implements ApplicationRunner {
         String tableName = entityClass.getAnnotation(Table.class).name();
         String schemaDescription = entityClass.getAnnotation(Schema.class).description();
         String packageName = entityClass.getPackage().getName();
+        boolean isTree = entityClass.getSuperclass().equals(BaseTreeEntity.class);
         TableEntity tableEntity = new TableEntity();
         tableEntity.setTableName(tableName);
         tableEntity.setEntityName(name);
         tableEntity.setPackageName(packageName);
         tableEntity.setDescription(schemaDescription);
         tableEntity.setId(packageAndName);
+        tableEntity.setIsTree(isTree);
         return tableEntity;
     }
 }

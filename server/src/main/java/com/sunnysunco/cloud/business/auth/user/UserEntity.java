@@ -66,7 +66,7 @@ public class UserEntity extends BaseEntity {
     @Schema(description = "头像")
     @TableField(exist = false)
     @OneToOne(targetEntity = ImageEntity.class)
-    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    @JoinColumn(name = "avatar_id")
     ImageEntity avatar;
 
 //    @Schema(description = "激活时间")

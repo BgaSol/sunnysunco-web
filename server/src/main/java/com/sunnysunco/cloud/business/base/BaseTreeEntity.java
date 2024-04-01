@@ -22,7 +22,7 @@ public abstract class BaseTreeEntity<T extends BaseTreeEntity<T>> extends BaseEn
 
     @Schema(description = "父实体")
     @TableField(exist = false)
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    @JoinColumn(name = "parent_id")
     @ManyToOne()
     @JsonIgnore
     private T parent;

@@ -3,7 +3,7 @@ package com.sunnysunco.cloud.codegeneration.table;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.sunnysunco.cloud.business.base.BaseEntity;
-import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumEntity;
+import com.sunnysunco.cloud.codegeneration.tablecolum.TableColumnEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -35,6 +35,11 @@ public class TableEntity extends BaseEntity {
     @Column(name = "eneity_name")
     private String entityName;
 
+    @TableField("is_tree")
+    @Schema(description = "是树结构表")
+    @Column(name = "is_tree")
+    private Boolean isTree;
+
     @TableField("package_name")
     @Schema(description = "包名")
     @Column(name = "package_name")
@@ -43,5 +48,5 @@ public class TableEntity extends BaseEntity {
     @OneToMany(mappedBy = "inTable")
     @Schema(description = "表内字段")
     @TableField(exist = false)
-    private List<TableColumEntity> tableColumns;
+    private List<TableColumnEntity> tableColumns;
 }

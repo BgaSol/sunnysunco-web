@@ -17,21 +17,21 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 
-@TableName("t_table_colum")
+@TableName("t_table_column")
 @Entity()
-@Table(name = "t_table_colum")
+@Table(name = "t_table_column")
 @Schema(description = "数据库表结构-字段")
-public class TableColumEntity extends BaseEntity {
+public class TableColumnEntity extends BaseEntity {
 
     @TableField("table_colum_name")
     @Schema(description = "表字段")
     @Column(name = "table_colum_name")
-    private String tableColumName;
+    private String tableColumnName;
 
     @TableField("entity_colum_name")
     @Schema(description = "实体字段")
     @Column(name = "entity_colum_name")
-    private String entityColumName;
+    private String entityColumnName;
 
     @Schema(description = "所在表id")
     @Column(name = "in_table_id")
@@ -67,4 +67,9 @@ public class TableColumEntity extends BaseEntity {
     @TableField("is_master")
     @Column(name = "is_master")
     private Boolean isMaster;
+
+    @Schema(description = "类型")
+    @TableField("type")
+    @Column(name = "type")
+    private String type;
 }

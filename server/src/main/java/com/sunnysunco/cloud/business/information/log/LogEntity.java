@@ -64,7 +64,7 @@ public class LogEntity extends BaseEntity {
 
     @Schema(description = "用户")
     @TableField(exist = false)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     @ManyToOne()
     private UserEntity user;
 }

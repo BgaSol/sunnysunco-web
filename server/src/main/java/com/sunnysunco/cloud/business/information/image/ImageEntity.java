@@ -50,6 +50,6 @@ public class ImageEntity extends BaseEntity {
     @TableField(exist = false)
     @Schema(description = "图片文件")
     @OneToOne(targetEntity = FileEntity.class)
-    @JoinColumn(name = "file_id", referencedColumnName = "id")
+    @JoinColumn(name = "file_id")
     FileEntity file;
 }

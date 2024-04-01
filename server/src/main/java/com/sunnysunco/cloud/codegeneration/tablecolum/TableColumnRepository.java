@@ -4,5 +4,5 @@ import com.sunnysunco.cloud.business.base.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TableColumRepository extends BaseRepository<TableColumEntity> {
+public interface TableColumnRepository extends BaseRepository<TableColumnEntity> {
 }
