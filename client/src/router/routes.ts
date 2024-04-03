@@ -5,17 +5,24 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/',
         name: 'home',
         redirect: {
-            name: 'app_home'
+            name: "app_home" // 如果首页为动态的自定义页面则改为 'app_client_page'
         }
     },
     {
         path: '/app',
         component: () => import('~/views/app/pages/index.vue'),
         children: [
-            // 根据情况修改首页 但是不要删除 AppHeader和CustomClientPage是搭配使用的。
             {
                 path: '',
                 name: 'app_home',
+                components: {
+                    default: () => import('~/views/app/pages/home/index.vue'),
+                    header: () => import('~/views/app/layout/AppHeader.vue'),
+                }
+            },
+            {
+                path: 'client_page',
+                name: "app_client_page",
                 components: {
                     default: () => import('~/views/app/layout/CustomClientPage.vue'),
                     header: () => import('~/views/app/layout/AppHeader.vue'),

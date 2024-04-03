@@ -66,19 +66,22 @@ const clientPageList = computed(() => {
 const route = useRoute();
 const router = useRouter();
 
-const activeMenu = ref(route.query.page as string || undefined);
+const activeMenu = computed(() => route.query.page as string || menu.activeMenu);
 const checkActiveMenu = (id: string) => {
-  activeMenu.value = id;
-  router.push({name: 'home', query: {page: id}})
+  router.push({name: 'app_client_page', query: {page: id}})
 }
 // 页面初始化时，如果没有page参数，就默认选中第一个
 watch(clientPageList, () => {
-  if ((clientPageList.value.length > 0) && !route.query.page && route.name === 'app_home') {
+  if ((clientPageList.value.length > 0) && !route.query.page && route.name === 'app_client_page') {
     nextTick(() => {
       checkActiveMenu(clientPageList.value[0].id as string)
     })
   }
 }, {immediate: true})
+
+const toPage = (name: string) => {
+  router.push({name});
+}
 </script>
 
 <template>
@@ -90,6 +93,7 @@ watch(clientPageList, () => {
         {{ departmentLogoAndName.logoName }}
       </div>
     </el-menu-item>
+    <el-menu-item @click="toPage('app_home')" index="app_home">首页</el-menu-item>
     <el-menu-item v-for="page in clientPageList" :key="page.id" :index="page.id" :page="page.id"
                   @click="checkActiveMenu(page.id as string)">
       {{ page.name }}
