@@ -58,6 +58,11 @@ public class TableColumnEntity extends BaseEntity {
     @ManyToOne()
     private TableEntity associatedTable;
 
+    @Schema(description = "关联字段")
+    @TableField("associated_column")
+    @Column(name = "associated_column")
+    private String associatedColumn;
+
     @Schema(description = "关联方式")
     @TableField("association_method")
     @Column(name = "association_method")

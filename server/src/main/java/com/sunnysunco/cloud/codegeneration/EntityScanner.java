@@ -121,7 +121,6 @@ public class EntityScanner implements ApplicationRunner {
             Class<?> associatedClass;
             if (isToMany) {
                 tableColumnEntity.setIsMaster(field.isAnnotationPresent(JoinTable.class));
-
                 // 获取关联表类型
                 ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
                 Type[] typeArguments = parameterizedType.getActualTypeArguments();
@@ -129,6 +128,15 @@ public class EntityScanner implements ApplicationRunner {
                 associatedClass = (Class<?>) typeArgument;
             } else {
                 tableColumnEntity.setIsMaster(field.isAnnotationPresent(JoinColumn.class));
+                if (tableColumnEntity.getIsMaster()) {
+                    tableColumnEntity.setTableColumnName(field.getAnnotation(JoinColumn.class).name());
+                } else {
+                    if (field.isAnnotationPresent(OneToMany.class)) {
+                        tableColumnEntity.setAssociatedColumn(field.getAnnotation(OneToMany.class).mappedBy());
+                    } else if (field.isAnnotationPresent(OneToOne.class)) {
+                        tableColumnEntity.setAssociatedColumn(field.getAnnotation(OneToOne.class).mappedBy());
+                    }
+                }
                 // 获取关联表类型
                 associatedClass = field.getType();
             }

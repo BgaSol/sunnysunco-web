@@ -6,3 +6,4 @@ docker
 *.iml
 out
 gen
+code_generation

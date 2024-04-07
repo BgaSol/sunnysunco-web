@@ -22,14 +22,14 @@ import javax.persistence.*;
 @Table(name = "${tableName}")
 @Schema(description = "${description}")
 public class ${entityName} extends <#if isTree>BaseTreeEntity<#else>BaseEntity</#if> {
-
 <#list tableColumns as tableColumn>
-    <#if tableColumn.type?exists>
+
+    <#if tableColumn.type??><#--类型-->
     @TableField("${tableColumn.tableColumnName}")
     @Column(name = "${tableColumn.tableColumnName}")
     </#if>
     @Schema(description = "${tableColumn.description}")
-    <#if tableColumn.type?exists>
+    <#if tableColumn.type??>
     private ${tableColumn.type} ${tableColumn.entityColumnName};
     <#else>
         <#if tableColumn.associationMethod == "OneToMany">
@@ -40,22 +40,43 @@ public class ${entityName} extends <#if isTree>BaseTreeEntity<#else>BaseEntity</
             joinColumns = @JoinColumn(name = "${tableName[2..]}_id"),
             inverseJoinColumns = @JoinColumn(name = "${tableColumn.associatedTable.tableName[2..]}_id"))
             <#else>
-    @OneToMany(mappedBy = "<#list tableColumn.associatedTable.tableColumns as cTableColumn></#list>")
+    @OneToMany(mappedBy = "${tableColumn.associatedColumn}")
+            </#if>
+    private List<${tableColumn.associatedTable.entityName}> ${tableColumn.associatedTable.tableName[2..]}List;
+        </#if>
+        <#if tableColumn.associationMethod == "ManyToMany">
+    @TableField(exist = false)
+            <#if tableColumn.isMaster>
+    @ManyToMany()
+    @JoinTable(name = "c_${tableName[2..]}_${tableColumn.associatedTable.tableName[2..]}",
+            joinColumns = @JoinColumn(name = "${tableName[2..]}_id"),
+            inverseJoinColumns = @JoinColumn(name = "${tableColumn.associatedTable.tableName[2..]}_id"))
+            <#else>
+    @ManyToMany(mappedBy = "${tableColumn.associatedColumn}")
             </#if>
     private List<${tableColumn.associatedTable.entityName}> ${tableColumn.associatedTable.tableName[2..]}List;
         </#if>
         <#if tableColumn.associationMethod == "OneToOne">
     @TableField(exist = false)
-    @OneToOne(targetEntity = ${tableColumn.associatedTable.entityName}.class)
             <#if tableColumn.isMaster>
+    @OneToOne()
     @JoinColumn(name = "${tableColumn.associatedTable.tableName[2..]}_id")
+            <#else>
+    @OneToOne(mappedBy = "${tableColumn.associatedColumn}")
             </#if>
+    private ${tableColumn.associatedTable.entityName} ${tableColumn.associatedTable.tableName[2..]};
         </#if>
-        <#if tableColumn.associationMethod == "OneToOne">
-            @OneToMany
-
+        <#if tableColumn.associationMethod == "ManyToOne">
+    @TableField(exist = false)
+            <#if tableColumn.isMaster>
+    @ManyToOne()
+    @JoinColumn(name = "${tableColumn.associatedTable.tableName[2..]}_id")
+            <#else>
+    @ManyToOne()
+    @JoinColumn(name = "${tableColumn.associatedColumn}")
+            </#if>
+    private ${tableColumn.associatedTable.entityName} ${tableColumn.associatedTable.tableName[2..]};
         </#if>
     </#if>
-
 </#list>
 }
