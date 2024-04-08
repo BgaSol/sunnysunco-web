@@ -3,10 +3,8 @@ package ${packageName};
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.sunnysunco.cloud.business.base.<#if isTree>BaseTreeEntity<#else>BaseEntity</#if>;
-import com.sunnysunco.cloud.business.information.file.FileEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.apache.ibatis.annotations.One;
 
 import javax.persistence.*;
 
@@ -24,7 +22,7 @@ import javax.persistence.*;
 public class ${entityName} extends <#if isTree>BaseTreeEntity<#else>BaseEntity</#if> {
 <#list tableColumns as tableColumn>
 
-    <#if tableColumn.type??><#--类型-->
+    <#if tableColumn.type??>
     @TableField("${tableColumn.tableColumnName}")
     @Column(name = "${tableColumn.tableColumnName}")
     </#if>

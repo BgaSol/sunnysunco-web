@@ -75,5 +75,31 @@ public class GenerationUtil implements ApplicationRunner {
             }
             Files.write(Paths.get("./code_generation/" + tableEntity.getEntityName().replace("Entity", "Repository") + ".java"), result.getBytes(StandardCharsets.UTF_8));
         }
+        // service
+        for (int i = 0; i < 3; i++) {
+            TableEntity tableEntity = all.get(i);
+
+            Template template = configuration.getTemplate("service.java.ftl");
+
+            String result = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+            Path dir = Paths.get("./code_generation");
+            if (!Files.exists(dir)) {
+                Files.createDirectory(dir);
+            }
+            Files.write(Paths.get("./code_generation/" + tableEntity.getEntityName().replace("Entity", "Service") + ".java"), result.getBytes(StandardCharsets.UTF_8));
+        }
+        // pageDto
+        for (int i = 0; i < 3; i++) {
+            TableEntity tableEntity = all.get(i);
+
+            Template template = configuration.getTemplate("dto/page.dto.java.ftl");
+
+            String result = FreeMarkerTemplateUtils.processTemplateIntoString(template, tableEntity);
+            Path dir = Paths.get("./code_generation/dto");
+            if (!Files.exists(dir)) {
+                Files.createDirectory(dir);
+            }
+            Files.write(Paths.get("./code_generation/dto/" + tableEntity.getEntityName().replace("Entity", "PageDto") + ".java"), result.getBytes(StandardCharsets.UTF_8));
+        }
     }
 }

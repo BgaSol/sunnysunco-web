@@ -30,9 +30,9 @@ public class TableEntity extends BaseEntity {
     @Column(name = "table_name")
     private String tableName;
 
-    @TableField("eneity_name")
+    @TableField("entity_name")
     @Schema(description = "实体名")
-    @Column(name = "eneity_name")
+    @Column(name = "entity_name")
     private String entityName;
 
     @TableField("is_tree")
