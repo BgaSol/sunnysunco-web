@@ -23,14 +23,14 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class GenerationUtil implements ApplicationRunner {
+public class GenerationService {
 
     private final TableService tableService;
     private final ResourceLoader resourceLoader;
 
-    @Override
+    // test 测试代码生成
     @Transactional(readOnly = true)
-    public void run(ApplicationArguments args) throws IOException, TemplateException {
+    public void generation() throws IOException, TemplateException {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_32);
         Resource resource = resourceLoader.getResource("classpath:codegenerationtemplate");
         configuration.setDirectoryForTemplateLoading(resource.getFile());

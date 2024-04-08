@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 @Component
 @Slf4j
 public class ZipUtil {
+
     public static void main(String[] args) {
         String zipFilePath = "x.zip";
         String destDirectory = "x";
