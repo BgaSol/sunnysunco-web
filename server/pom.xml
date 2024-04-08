@@ -25,8 +25,14 @@
         <commons-exec.version>1.4.0</commons-exec.version>
         <postgresql.version>42.7.3</postgresql.version>
         <freemarker.version>2.3.32</freemarker.version>
+        <pdfbox.version>3.0.2</pdfbox.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <scope>annotationProcessor</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -140,6 +146,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-exec</artifactId>
             <version>${commons-exec.version}</version>
+        </dependency>
+        <!--pdfbox-->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${pdfbox.version}</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
