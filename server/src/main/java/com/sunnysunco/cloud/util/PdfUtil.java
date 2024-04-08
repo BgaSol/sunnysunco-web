@@ -21,12 +21,13 @@ import java.util.concurrent.Executors;
 public class PdfUtil {
     // 获取当前系统线程数
     private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
+
     public static void main(String[] args) {
 
     }
+
     /**
      * 多线程pdf转图片
-     *
      */
     void pdfToImageMultithreading(List<PdfToImageDto> pdfToImageDtoList) {
         // 创建线程池
@@ -43,7 +44,7 @@ public class PdfUtil {
      * @param destDir     图片保存路径
      * @param dpi         图片分辨率
      */
-    public static void pdfToImage(String pdfFilePath, String destDir, int dpi, String type) {
+    public static void pdfToImage(String pdfFilePath, String destDir, Integer dpi, String type) {
         // 判断destDir是否存在
         File destDirectory = new File(destDir);
         if (destDirectory.exists()) {
@@ -81,6 +82,7 @@ public class PdfUtil {
         long end = System.currentTimeMillis();
         log.info("pdf转图片耗时：{}ms", end - start);
     }
+
     public static void pdfToImage(PdfToImageDto pdfToImageDto) {
         pdfToImage(pdfToImageDto.getPdfFilePath(), pdfToImageDto.getDestDir(), pdfToImageDto.getDpi(), pdfToImageDto.getType());
     }
