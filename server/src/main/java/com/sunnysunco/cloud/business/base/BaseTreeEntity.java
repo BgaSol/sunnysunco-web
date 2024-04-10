@@ -27,7 +27,7 @@ public abstract class BaseTreeEntity<T extends BaseTreeEntity<T>> extends BaseEn
     @JsonIgnore
     private T parent;
 
-    @Schema(description = "子权限")
+    @Schema(description = "子实体")
     @TableField(exist = false)
     @OneToMany(mappedBy = "parent")
     private List<T> children;
