@@ -6,10 +6,7 @@ import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.exception.BaseException;
 import com.sunnysunco.cloud.business.information.file.dto.CreateFileDto;
 import com.sunnysunco.cloud.config.minio.MinioConfig;
-import io.minio.GetObjectArgs;
-import io.minio.GetObjectResponse;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
+import io.minio.*;
 import io.minio.errors.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -143,5 +140,37 @@ public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>
             log.error("获取文件流失败", e);
             throw new BaseException("获取文件流失败");
         }
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param ids 文件id
+     * @return 删除数量
+     */
+    @Override
+    @Transactional
+    public Integer[] delete(String... ids) {
+        for (String id : ids) {
+            FileEntity fileEntity = this.findById(id);
+            if (fileEntity == null) {
+                throw new BaseException("文件不存在");
+            }
+            try {
+                RemoveObjectArgs build = RemoveObjectArgs
+                        .builder()
+                        .bucket(fileEntity.getBucket())
+                        .object(fileEntity.getId())
+                        .build();
+                // 删除文件
+                minioClient.removeObject(build);
+            } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                     InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                     XmlParserException e) {
+                log.error("删除文件失败", e);
+                throw new BaseException("删除文件失败");
+            }
+        }
+        return super.delete(ids);
     }
 }
