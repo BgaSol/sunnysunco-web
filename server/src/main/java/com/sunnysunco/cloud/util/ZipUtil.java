@@ -27,6 +27,12 @@ public class ZipUtil {
         }
     }
 
+    /**
+     * 解压zip文件
+     *
+     * @param zipFilePath zip文件路径
+     * @param destDir     解压目录
+     */
     public static void unzip(String zipFilePath, String destDir) {
         // 判断destDir是否存在
         File destDirectory = new File(destDir);
@@ -39,16 +45,31 @@ public class ZipUtil {
             log.error("zip文件不存在");
             throw new BaseException("zip文件不存在");
         }
-        long start = System.currentTimeMillis();
+
+        InputStream inputStream = null;
         try {
-            // 获取zip文件的输入流
-            InputStream inputStream = Files.newInputStream(Paths.get(zipFilePath));
-            //todo 获取zip文件的字符编码
-            String encoding = CharsetNames.UTF_8;
-            // 创建zip输入流 用于读取zip文件
-            ZipArchiveInputStream zipArchiveInputStream = new ZipArchiveInputStream(inputStream, encoding);
-            // 获取zip文件中的每一个文件
-            ZipArchiveEntry zipArchiveEntry;
+            inputStream = Files.newInputStream(Paths.get(zipFilePath));
+        } catch (IOException e) {
+            log.error("zip文件读取失败", e);
+        }
+        unzip(inputStream, destDir);
+    }
+
+    /**
+     * 解压zip文件
+     *
+     * @param inputStream zip文件输入流
+     * @param destDir     解压目录
+     */
+    public static void unzip(InputStream inputStream, String destDir) {
+        long start = System.currentTimeMillis();
+        //todo 获取zip文件的字符编码
+        String encoding = CharsetNames.UTF_8;
+        // 创建zip输入流 用于读取zip文件
+        ZipArchiveInputStream zipArchiveInputStream = new ZipArchiveInputStream(inputStream, encoding);
+        // 获取zip文件中的每一个文件
+        ZipArchiveEntry zipArchiveEntry;
+        try {
             while ((zipArchiveEntry = zipArchiveInputStream.getNextEntry()) != null) {
                 // 获取文件名
                 if (zipArchiveEntry.isDirectory()) {
@@ -64,10 +85,11 @@ public class ZipUtil {
                     IOUtils.copy(zipArchiveInputStream, fos);
                 }
             }
-            long end = System.currentTimeMillis();
-            log.info("解压完成，耗时：" + (end - start) + "ms");
         } catch (IOException e) {
-            log.error("unzip error", e);
+            log.error("解压失败", e);
+            throw new BaseException("解压失败");
         }
+        long end = System.currentTimeMillis();
+        log.info("解压完成，耗时：" + (end - start) + "ms");
     }
 }
