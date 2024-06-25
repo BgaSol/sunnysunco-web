@@ -55,7 +55,7 @@ public class UserController extends BaseController<
 
     @GetMapping("/user-info")
     @Operation(summary = "获取用户信息", operationId = "getUserInfo")
-    @SaCheckPermission({"user:getUserInfo"})
+//    @SaCheckPermission({"user:getUserInfo"})
     public BaseVo<UserEntity> getUserInfo() {
         UserEntity user = this.userService.getUserInfo();
         return BaseVo.success(user);

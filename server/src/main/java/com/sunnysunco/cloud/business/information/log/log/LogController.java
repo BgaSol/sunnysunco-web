@@ -1,4 +1,4 @@
-package com.sunnysunco.cloud.business.information.log;
+package com.sunnysunco.cloud.business.information.log.log;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.sunnysunco.cloud.business.base.BaseController;
@@ -6,7 +6,7 @@ import com.sunnysunco.cloud.business.base.dto.BaseCreateDto;
 import com.sunnysunco.cloud.business.base.dto.BaseUpdateDto;
 import com.sunnysunco.cloud.business.base.vo.BaseVo;
 import com.sunnysunco.cloud.business.base.vo.PageVo;
-import com.sunnysunco.cloud.business.information.log.dto.LogPageDto;
+import com.sunnysunco.cloud.business.information.log.log.dto.LogPageDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,7 @@ public class LogController extends BaseController<
 
     @Override
     @DeleteMapping("/{ids}")
-    @Operation(summary = "删除菜单", operationId = "deleteLog")
+    @Operation(summary = "删除日志", operationId = "deleteLog")
     @SaCheckPermission("log:delete")
     public BaseVo<Integer[]> delete(@PathVariable String ids) {
         return super.delete(ids);

@@ -8,12 +8,13 @@ import com.sunnysunco.cloud.business.auth.menu.MenuType;
 import com.sunnysunco.cloud.business.auth.user.UserEntity;
 import com.sunnysunco.cloud.business.auth.user.UserMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SystemInitData implements ApplicationRunner {
 
     private final UserMapper userMapper;
@@ -38,8 +39,8 @@ public class SystemInitData implements ApplicationRunner {
         {
             MenuEntity systemAuth = new MenuEntity();
             systemAuth.setId("systemAuth");
-            systemAuth.setName("系统身份验证");
-            systemAuth.setType(MenuType.MENU);
+            systemAuth.setName("系统基础管理");
+            systemAuth.setMenuType(MenuType.MENU);
             systemAuth.setIcon("Lock");
             systemAuth.setMenuGroup("admin-master");
             if (menuMapper.selectById(systemAuth.getId()) == null) {
@@ -50,7 +51,7 @@ public class SystemInitData implements ApplicationRunner {
                 role.setId("role");
                 role.setName("角色管理");
                 role.setParentId(systemAuth.getId());
-                role.setType(MenuType.PAGE);
+                role.setMenuType(MenuType.PAGE);
                 role.setPath("/admin/role");
                 role.setRouteName("admin_role");
                 role.setIcon("Crop");
@@ -63,7 +64,7 @@ public class SystemInitData implements ApplicationRunner {
                 user.setId("user");
                 user.setName("用户管理");
                 user.setParentId(systemAuth.getId());
-                user.setType(MenuType.PAGE);
+                user.setMenuType(MenuType.PAGE);
                 user.setPath("/admin/user");
                 user.setRouteName("admin_user");
                 user.setIcon("User");
@@ -76,7 +77,7 @@ public class SystemInitData implements ApplicationRunner {
                 permission.setId("permission");
                 permission.setName("权限管理");
                 permission.setParentId(systemAuth.getId());
-                permission.setType(MenuType.PAGE);
+                permission.setMenuType(MenuType.PAGE);
                 permission.setPath("/admin/permission");
                 permission.setRouteName("admin_permission");
                 permission.setIcon("Operation");
@@ -89,7 +90,7 @@ public class SystemInitData implements ApplicationRunner {
                 menu.setId("menu");
                 menu.setName("菜单管理");
                 menu.setParentId(systemAuth.getId());
-                menu.setType(MenuType.PAGE);
+                menu.setMenuType(MenuType.PAGE);
                 menu.setPath("/admin/menu");
                 menu.setRouteName("admin_menu");
                 menu.setIcon("Menu");
@@ -102,7 +103,7 @@ public class SystemInitData implements ApplicationRunner {
                 clientPage.setId("clientPage");
                 clientPage.setName("自定义页面");
                 clientPage.setParentId(systemAuth.getId());
-                clientPage.setType(MenuType.PAGE);
+                clientPage.setMenuType(MenuType.PAGE);
                 clientPage.setPath("/admin/client-page");
                 clientPage.setRouteName("admin_client_page");
                 clientPage.setIcon("Memo");
@@ -115,7 +116,7 @@ public class SystemInitData implements ApplicationRunner {
                 department.setId("department");
                 department.setName("部门管理");
                 department.setParentId(systemAuth.getId());
-                department.setType(MenuType.PAGE);
+                department.setMenuType(MenuType.PAGE);
                 department.setPath("/admin/department");
                 department.setRouteName("admin_department");
                 department.setIcon("Connection");
@@ -128,7 +129,7 @@ public class SystemInitData implements ApplicationRunner {
                 tag.setId("tag");
                 tag.setName("标签管理");
                 tag.setParentId(systemAuth.getId());
-                tag.setType(MenuType.PAGE);
+                tag.setMenuType(MenuType.PAGE);
                 tag.setPath("/admin/tag");
                 tag.setRouteName("admin_tag");
                 tag.setIcon("Paperclip");
@@ -142,7 +143,7 @@ public class SystemInitData implements ApplicationRunner {
             MenuEntity systemInformation = new MenuEntity();
             systemInformation.setId("systemInformation");
             systemInformation.setName("系统信息");
-            systemInformation.setType(MenuType.MENU);
+            systemInformation.setMenuType(MenuType.MENU);
             systemInformation.setIcon("View");
             systemInformation.setMenuGroup("admin-master");
             if (menuMapper.selectById(systemInformation.getId()) == null) {
@@ -153,7 +154,7 @@ public class SystemInitData implements ApplicationRunner {
                 log.setId("log");
                 log.setName("日志管理");
                 log.setParentId(systemInformation.getId());
-                log.setType(MenuType.PAGE);
+                log.setMenuType(MenuType.PAGE);
                 log.setPath("/admin/log");
                 log.setRouteName("admin_log");
                 log.setIcon("Document");
@@ -167,7 +168,7 @@ public class SystemInitData implements ApplicationRunner {
                 image.setId("image");
                 image.setName("图片管理");
                 image.setParentId(systemInformation.getId());
-                image.setType(MenuType.PAGE);
+                image.setMenuType(MenuType.PAGE);
                 image.setPath("/admin/image");
                 image.setRouteName("admin_image");
                 image.setIcon("Picture");
@@ -181,7 +182,7 @@ public class SystemInitData implements ApplicationRunner {
 
     private void initDepartment() {
         DepartmentEntity department = new DepartmentEntity();
-        department.setName("默认部门");
+        department.setName("SunnySunCo");
         department.setDescription("系统必须要有一个部门，用于存放没有部门的用户");
         department.setId("default");
         if (this.departmentMapper.selectById(department.getId()) == null) {

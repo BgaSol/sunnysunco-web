@@ -2,11 +2,16 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { RoleEntity } from './RoleEntity';
 /**
  * 文件实体类
  */
 export type FileEntity = {
     id?: string;
+    /**
+     * 类型
+     */
+    type?: string;
     /**
      * 排序
      */
@@ -20,13 +25,13 @@ export type FileEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
+    /**
+     * 可访问该行数据的角色
+     */
+    accessRole?: Array<RoleEntity>;
     /**
      * 文件名称
      */
@@ -35,10 +40,6 @@ export type FileEntity = {
      * 文件地址
      */
     url?: string;
-    /**
-     * 文件类型
-     */
-    type?: string;
     /**
      * 文件大小
      */

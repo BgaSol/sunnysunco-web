@@ -36,9 +36,4 @@ public class TagEntity extends BaseEntity {
     @TableField("tag_group")
     @Column(name = "tag_group")
     String tagGroup;
-
-    @Schema(description = "标签类型")
-    @TableField("type")
-    @Column(name = "type")
-    String type;
 }

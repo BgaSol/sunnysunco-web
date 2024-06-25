@@ -42,6 +42,6 @@ public class PdfEntity extends BaseEntity {
 
     @Schema(description = "页面列表")
     @OneToMany(mappedBy = "pdf")
+    @TableField(exist = false)
     private List<PdfPageEntity> pages;
-
 }

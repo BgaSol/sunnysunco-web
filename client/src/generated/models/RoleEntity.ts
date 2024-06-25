@@ -10,6 +10,10 @@ import type { PermissionEntity } from './PermissionEntity';
 export type RoleEntity = {
     id?: string;
     /**
+     * 类型
+     */
+    type?: string;
+    /**
      * 排序
      */
     sort?: number;
@@ -22,13 +26,13 @@ export type RoleEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
+    /**
+     * 可访问该行数据的角色
+     */
+    accessRole?: Array<RoleEntity>;
     /**
      * 角色名
      */
@@ -41,10 +45,6 @@ export type RoleEntity = {
      * 角色状态
      */
     status?: number;
-    /**
-     * 角色类型
-     */
-    type?: number;
     /**
      * 角色权限
      */

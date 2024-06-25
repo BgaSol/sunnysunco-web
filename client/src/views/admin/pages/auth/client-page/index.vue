@@ -67,7 +67,8 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
     </div>
     <div class="controllers">
       <create-client-page @success='getTable'></create-client-page>
-      <base-batch-delete :api="Service.deleteClientPage" :table="tableRef" @success='getTable'></base-batch-delete>
+      <base-batch-delete v-if="tableRef"
+                         :api="Service.deleteClientPage" :table="tableRef" @success='getTable'></base-batch-delete>
     </div>
     <div class='table'>
       <div class='table-container'>
@@ -81,9 +82,9 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
             </template>
           </el-table-column>
           <el-table-column align='center' label='名称' min-width="200" prop='name'></el-table-column>
-          <el-table-column align='center' label='顺序' prop='sort' width='80'></el-table-column>
+          <el-table-column align='center' label='顺序' prop='sort' min-width='80'></el-table-column>
           <el-table-column align='center' label='描述' min-width="200" prop='description'></el-table-column>
-          <el-table-column align='center' label='创建时间' prop='createTime' width='180'>
+          <el-table-column align='center' label='创建时间' prop='createTime' min-width='180'>
             <template #default='{ row }'>
               {{ dayjs(row.createTime).format('YYYY-MM-DD HH:mm:ss') }}
             </template>

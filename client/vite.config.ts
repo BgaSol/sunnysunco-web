@@ -53,4 +53,4 @@ OpenAPI.generate({
     input: "http://localhost:8080/api/api-docs",
     output: "./src/generated",
     httpClient: HttpClient.AXIOS,
-}).then(r => console.log("Generated OpenAPI client")).catch((e) => console.error(e))
+}).then(() => console.log("Generated OpenAPI client")).catch((e) => console.error(e))

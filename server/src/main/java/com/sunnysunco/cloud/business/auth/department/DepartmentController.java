@@ -77,13 +77,13 @@ public class DepartmentController extends BaseController<
         return super.findAll();
     }
 
-    @GetMapping("/findByIdIsDefault")
+    @GetMapping("/find-by-id-is-default")
     @Operation(summary = "查询默认部门", operationId = "findDefaultDepartment")
     public BaseVo<DepartmentEntity> findById() {
         return super.findById("default");
     }
 
-    @GetMapping("/downloadLogo")
+    @GetMapping("/download-logo")
     @Operation(summary = "获取部门Logo", operationId = "downloadImage")
     public ResponseEntity<InputStreamResource> download(HttpServletRequest request) {
         // 获取域名
@@ -94,7 +94,7 @@ public class DepartmentController extends BaseController<
                 .body(new InputStreamResource(fileStream));
     }
 
-    @GetMapping("/getMyDepartment")
+    @GetMapping("/get-my-department")
     @Operation(summary = "获取我的部门", operationId = "getMyDepartment")
     public BaseVo<DepartmentEntity> getMyDepartment(HttpServletRequest request) {
         // 获取域名

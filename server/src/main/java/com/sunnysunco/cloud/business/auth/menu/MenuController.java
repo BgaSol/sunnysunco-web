@@ -71,7 +71,7 @@ public class MenuController extends BaseController<
         return super.findAll();
     }
 
-    @GetMapping("/admin-menu-group")
+    @GetMapping("/find-admin-menu-group")
     @Operation(summary = "查询管理员菜单组", operationId = "findAdminMenuGroup")
     @SaCheckPermission("menu:findAdminMenuGroup")
     public BaseVo<List<MenuEntity>> findAdminMenuGroup() {

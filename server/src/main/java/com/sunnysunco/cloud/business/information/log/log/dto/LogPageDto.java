@@ -1,7 +1,7 @@
-package com.sunnysunco.cloud.business.information.log.dto;
+package com.sunnysunco.cloud.business.information.log.log.dto;
 
 import com.sunnysunco.cloud.business.base.dto.BasePageDto;
-import com.sunnysunco.cloud.business.information.log.LogEntity;
+import com.sunnysunco.cloud.business.information.log.log.LogEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

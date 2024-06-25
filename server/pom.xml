@@ -21,11 +21,14 @@
         <minio.version>8.5.9</minio.version>
         <commons-codedc.version>1.16.1</commons-codedc.version>
         <user-agent-utils>1.21</user-agent-utils>
-        <!--        <mysql.version>8.3.0</mysql.version>-->
+        <!--<mysql.version>8.3.0</mysql.version>-->
         <commons-exec.version>1.4.0</commons-exec.version>
         <postgresql.version>42.7.3</postgresql.version>
         <freemarker.version>2.3.32</freemarker.version>
         <pdfbox.version>3.0.2</pdfbox.version>
+        <commons-compress.version>1.26.1</commons-compress.version>
+        <xz.version>1.9</xz.version>
+        <oshi.version>6.4.13</oshi.version>
     </properties>
     <dependencies>
         <dependency>
@@ -147,11 +150,27 @@
             <artifactId>commons-exec</artifactId>
             <version>${commons-exec.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>${commons-compress.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tukaani</groupId>
+            <artifactId>xz</artifactId>
+            <version>${xz.version}</version>
+        </dependency>
         <!--pdfbox-->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>${pdfbox.version}</version>
+        </dependency>
+        <!--oshi-->
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>${oshi.version}</version>
         </dependency>
     </dependencies>
     <dependencyManagement>

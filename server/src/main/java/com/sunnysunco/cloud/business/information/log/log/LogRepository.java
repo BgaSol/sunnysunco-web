@@ -1,4 +1,4 @@
-package com.sunnysunco.cloud.business.information.log;
+package com.sunnysunco.cloud.business.information.log.log;
 
 import com.sunnysunco.cloud.business.base.BaseRepository;
 import org.springframework.stereotype.Repository;

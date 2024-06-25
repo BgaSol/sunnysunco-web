@@ -29,7 +29,7 @@ public class PdfPageEntity extends BaseEntity {
     private Integer page;
 
     @Schema(description = "图片列表")
-    @TableField("image_list")
+    @TableField(exist = false)
     @ManyToMany()
     @JoinTable(name = "c_pdf_page_image",
             joinColumns = @JoinColumn(name = "pdf_id"),
@@ -47,6 +47,7 @@ public class PdfPageEntity extends BaseEntity {
     private Integer verticalImageCount;
 
     @Schema(description = "pdf")
+    @TableField(exist = false)
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "pdf_id")

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -48,6 +49,7 @@ public class ImageService extends BaseService<ImageEntity, ImagePageDto> {
         BufferedImage read;
         try {
             read = ImageIO.read(imageStream);
+            imageStream.close();
         } catch (IOException e) {
             throw new BaseException("图片读取错误");
         }
@@ -56,6 +58,14 @@ public class ImageService extends BaseService<ImageEntity, ImagePageDto> {
         entity.setHeight(read.getHeight());
         // 设置图片类型
         return super.save(entity);
+    }
+
+    @Transactional
+    public ImageEntity save(File imageFile) {
+        FileEntity file = fileService.save(imageFile, null);
+        ImageEntity imageEntity = new ImageEntity();
+        imageEntity.setFileId(file.getId());
+        return this.save(imageEntity);
     }
 
     @Override
@@ -70,6 +80,7 @@ public class ImageService extends BaseService<ImageEntity, ImagePageDto> {
         BufferedImage read;
         try {
             read = ImageIO.read(imageStream);
+            imageStream.close();
         } catch (IOException e) {
             throw new BaseException("图片读取错误");
         }

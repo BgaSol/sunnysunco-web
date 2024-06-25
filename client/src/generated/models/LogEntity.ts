@@ -2,12 +2,17 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { RoleEntity } from './RoleEntity';
 import type { UserEntity } from './UserEntity';
 /**
  * 日志实体类
  */
 export type LogEntity = {
     id?: string;
+    /**
+     * 类型
+     */
+    type?: string;
     /**
      * 排序
      */
@@ -21,17 +26,13 @@ export type LogEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
     /**
-     * 日志类型
+     * 可访问该行数据的角色
      */
-    type?: string;
+    accessRole?: Array<RoleEntity>;
     /**
      * 请求地址
      */

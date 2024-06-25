@@ -1,6 +1,6 @@
 package com.sunnysunco.cloud.config;
 
-import com.sunnysunco.cloud.business.information.log.LogInterceptors;
+import com.sunnysunco.cloud.business.information.log.log.LogInterceptors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface BaseSCMapper<T> extends BaseMapper<T> {
     /**
+     * 插入中间表数据
      * @param tableName   中间表名
      * @param masterName  主表主键名
      * @param masterValue 主表主键值
@@ -23,6 +24,7 @@ public interface BaseSCMapper<T> extends BaseMapper<T> {
                          @Param("slaveValue") String slaveValue);
 
     /**
+     * 删除中间表数据
      * @param tableName  中间表名
      * @param masterName 主表主键名
      * @param id         主表主键值
@@ -32,6 +34,10 @@ public interface BaseSCMapper<T> extends BaseMapper<T> {
                          @Param("masterName") String masterName,
                          @Param("id") String id);
 
+    /**
+     * 清空中间表
+     * @param tableName 中间表名
+     */
     @Delete("TRUNCATE TABLE ${tableName} CASCADE")
     void truncateTable(@Param("tableName") String tableName);
 }

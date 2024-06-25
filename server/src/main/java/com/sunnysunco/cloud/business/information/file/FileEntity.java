@@ -32,11 +32,6 @@ public class FileEntity extends BaseEntity {
     @Column(name = "url")
     private String url;
 
-    @Schema(description = "文件类型")
-    @TableField("type")
-    @Column(name = "type")
-    private String type;
-
     @Schema(description = "文件大小")
     @TableField("size")
     @Column(name = "size")

@@ -1,4 +1,4 @@
-package com.sunnysunco.cloud.business.information.log;
+package com.sunnysunco.cloud.business.information.log.log;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -21,11 +21,6 @@ import javax.persistence.*;
 @Table(name = "t_log")
 @Schema(description = "日志实体类")
 public class LogEntity extends BaseEntity {
-    @Schema(description = "日志类型")
-    @TableField("type")
-    @Column(name = "type")
-    private String type;
-
     @Schema(description = "请求地址")
     @TableField("url")
     @Column(name = "url", length = 4096)

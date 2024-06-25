@@ -8,6 +8,10 @@
 export type MenuEntity = {
     id?: string;
     /**
+     * 类型
+     */
+    type?: string;
+    /**
      * 排序
      */
     sort?: number;
@@ -20,15 +24,11 @@ export type MenuEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
     /**
-     * 子权限
+     * 子实体
      */
     children?: Array<MenuEntity>;
     /**
@@ -42,7 +42,7 @@ export type MenuEntity = {
     /**
      * 菜单类型
      */
-    type?: MenuEntity.type;
+    menuType?: MenuEntity.menuType;
     /**
      * 菜单路由地址
      */
@@ -92,7 +92,7 @@ export namespace MenuEntity {
     /**
      * 菜单类型
      */
-    export enum type {
+    export enum menuType {
         MENU = 'MENU',
         PAGE = 'PAGE',
         BUTTON = 'BUTTON',

@@ -32,10 +32,10 @@ public class MenuEntity extends BaseTreeEntity<MenuEntity> {
     private Integer status;
 
     @Schema(description = "菜单类型")
-    @TableField("type")
-    @Column(name = "type")
+    @TableField("menu_type")
+    @Column(name = "menu_type")
     @Enumerated(EnumType.STRING)
-    private MenuType type;
+    private MenuType menuType;
 
     @Schema(description = "菜单路由地址")
     @TableField("route_path")

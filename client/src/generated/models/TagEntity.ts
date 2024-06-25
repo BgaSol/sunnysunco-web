@@ -2,11 +2,16 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { RoleEntity } from './RoleEntity';
 /**
  * 标签实体类
  */
 export type TagEntity = {
     id?: string;
+    /**
+     * 类型
+     */
+    type?: string;
     /**
      * 排序
      */
@@ -20,13 +25,13 @@ export type TagEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
+    /**
+     * 可访问该行数据的角色
+     */
+    accessRole?: Array<RoleEntity>;
     /**
      * 标签名称
      */
@@ -39,9 +44,5 @@ export type TagEntity = {
      * 标签分组
      */
     tagGroup?: string;
-    /**
-     * 标签类型
-     */
-    type?: string;
 };
 

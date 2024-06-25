@@ -4,11 +4,16 @@
 /* eslint-disable */
 import type { ClientPageEntity } from './ClientPageEntity';
 import type { ImageEntity } from './ImageEntity';
+import type { RoleEntity } from './RoleEntity';
 /**
  * 部门实体
  */
 export type DepartmentEntity = {
     id?: string;
+    /**
+     * 类型
+     */
+    type?: string;
     /**
      * 排序
      */
@@ -22,15 +27,15 @@ export type DepartmentEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
     /**
-     * 子权限
+     * 可访问该行数据的角色
+     */
+    accessRole?: Array<RoleEntity>;
+    /**
+     * 子实体
      */
     children?: Array<DepartmentEntity>;
     /**

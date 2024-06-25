@@ -72,9 +72,4 @@ public class TableColumnEntity extends BaseEntity {
     @TableField("is_master")
     @Column(name = "is_master")
     private Boolean isMaster;
-
-    @Schema(description = "类型")
-    @TableField("type")
-    @Column(name = "type")
-    private String type;
 }

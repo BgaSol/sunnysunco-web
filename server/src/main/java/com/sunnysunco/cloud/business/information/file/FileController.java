@@ -10,17 +10,24 @@ import io.minio.GetObjectResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "文件管理")
 @RequestMapping("/file")
+@Slf4j
 public class FileController extends BaseController<
         FileEntity,
         BasePageDto<FileEntity>,
@@ -72,8 +79,19 @@ public class FileController extends BaseController<
     @SaCheckPermission("file:download")
     public ResponseEntity<InputStreamResource> download(@PathVariable String id) {
         GetObjectResponse fileStream = this.fileService.getFileStream(id);
+
+        FileEntity file = fileService.findById(id);
+        String fileName = file.getName();
+        if (ObjectUtils.isEmpty(fileName)) {
+            fileName = file.getId();
+        }
+        if (!fileName.contains(".")) {
+            fileName = fileName + "." + file.getSuffix();
+        }
         return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_LENGTH, String.valueOf(file.getSize()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8))
+                .contentType(MediaType.valueOf(file.getType()))
                 .body(new InputStreamResource(fileStream));
     }
 }

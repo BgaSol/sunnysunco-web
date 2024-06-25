@@ -8,6 +8,10 @@
 export type PermissionEntity = {
     id?: string;
     /**
+     * 类型
+     */
+    type?: string;
+    /**
      * 排序
      */
     sort?: number;
@@ -20,15 +24,11 @@ export type PermissionEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
     /**
-     * 子权限
+     * 子实体
      */
     children?: Array<PermissionEntity>;
     /**
@@ -47,10 +47,6 @@ export type PermissionEntity = {
      * 权限状态
      */
     status?: number;
-    /**
-     * 权限类型
-     */
-    type?: number;
     /**
      * 父id
      */

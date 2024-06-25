@@ -16,25 +16,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class PdfUtil {
     // 获取当前系统线程数
     private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
 
-    public static void main(String[] args) {
-
-    }
+    // 获取当前可用线程数
+    private static final int AVAILABLE_THREAD_COUNT = THREAD_COUNT > 2 ? THREAD_COUNT - 2 : 1;
 
     /**
      * 多线程pdf转图片
      */
-    void pdfToImageMultithreading(List<PdfToImageDto> pdfToImageDtoList) {
-        // 创建线程池
-        ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
+    public static boolean pdfToImageMultithreading(List<PdfToImageDto> pdfToImageDtoList) throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(AVAILABLE_THREAD_COUNT);
         for (PdfToImageDto pdfToImageDto : pdfToImageDtoList) {
             executorService.execute(() -> pdfToImage(pdfToImageDto));
         }
+        executorService.shutdown();
+        return executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
     }
 
     /**
@@ -47,6 +48,7 @@ public class PdfUtil {
     public static void pdfToImage(String pdfFilePath, String destDir, Integer dpi, String type) {
         // 判断destDir是否存在
         File destDirectory = new File(destDir);
+        // 删除destDir文件夹
         if (destDirectory.exists()) {
             destDirectory.delete();
         }
@@ -60,8 +62,9 @@ public class PdfUtil {
         }
         long start = System.currentTimeMillis();
         try {
+            RandomAccessReadBufferedFile randomAccessReadBufferedFile = new RandomAccessReadBufferedFile(pdfFile);
             // 创建pdf文件
-            PDDocument document = Loader.loadPDF(new RandomAccessReadBufferedFile(pdfFile));
+            PDDocument document = Loader.loadPDF(randomAccessReadBufferedFile);
             // 获取pdf文件的页数
             int pageCount = document.getNumberOfPages();
             // 创建pdf文件的图片
@@ -75,6 +78,9 @@ public class PdfUtil {
                 ImageIO.write(image, type, imageFile);
                 log.info("pdf转图片成功：{}", imageFile.getAbsolutePath());
             }
+            document.close();
+            randomAccessReadBufferedFile.close();
+
         } catch (IOException e) {
             log.error("pdf转图片失败", e);
             throw new BaseException("pdf转图片失败");

@@ -1,10 +1,12 @@
 package com.sunnysunco.cloud.config.satoken;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpInterface;
 import com.sunnysunco.cloud.business.auth.permission.PermissionEntity;
 import com.sunnysunco.cloud.business.auth.role.RoleEntity;
 import com.sunnysunco.cloud.business.auth.user.UserEntity;
 import com.sunnysunco.cloud.business.auth.user.UserService;
+import com.sunnysunco.cloud.business.base.exception.BaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +33,11 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     @Transactional(readOnly = true)
     public List<String> getPermissionList(Object loginId, String loginType) {
-        String userId = (String) loginId;
+        UserEntity user = this.getUser((String) loginId, loginType);
         Set<String> permissions = new HashSet<>();
-        if (userId.equals("admin")) {
+        if (user.getId().equals("admin")) {
             permissions.add("*");
         } else {
-            UserEntity user = userService.getUserInfo(userId);
             for (RoleEntity role : user.getRoles()) {
                 for (PermissionEntity permission : role.getPermissions()) {
                     permissions.add(permission.getCode());
@@ -52,16 +53,23 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     @Transactional(readOnly = true)
     public List<String> getRoleList(Object loginId, String loginType) {
-        String userId = (String) loginId;
+        UserEntity user = this.getUser((String) loginId, loginType);
         Set<String> roles = new HashSet<>();
-        if (userId.equals("admin")) {
+        if (user.getId().equals("admin")) {
             roles.add("*");
         } else {
-            UserEntity user = userService.getUserInfo(userId);
             for (RoleEntity role : user.getRoles()) {
                 roles.add(role.getCode());
             }
         }
         return new ArrayList<>(roles);
+    }
+
+    public UserEntity getUser(String userId, String loginType) {
+        try {
+            return userService.getUserInfo(userId);
+        } catch (BaseException e) {
+            throw new NotLoginException(e.getMessage(), loginType, NotLoginException.INVALID_TOKEN);
+        }
     }
 }

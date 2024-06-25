@@ -18,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -54,6 +55,10 @@ public class UserService extends BaseService<UserEntity, UserPageDto> {
 
     @Override
     public UserEntity save(UserEntity entity) {
+        // 检查用户名是否存在
+        if (userMapper.selectCount(new QueryWrapper<UserEntity>().eq("username", entity.getUsername())) > 0) {
+            throw new BaseException("用户名已存在");
+        }
         String password = entity.getPassword();
         if (ObjectUtils.isNotEmpty(password)) {
             // todo 密码加密 password
@@ -147,5 +152,13 @@ public class UserService extends BaseService<UserEntity, UserPageDto> {
 
     public void logout() {
         StpUtil.logout();
+    }
+
+    /**
+     * @param userId 用户id
+     * @return 用户拥有的角色所关联的外部id
+     */
+    public List<String> getAssociatedID(String userId) {
+        return this.userMapper.getAssociatedID(userId);
     }
 }

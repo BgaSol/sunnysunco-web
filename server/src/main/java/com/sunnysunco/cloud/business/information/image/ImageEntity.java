@@ -26,11 +26,6 @@ public class ImageEntity extends BaseEntity {
     @Column(name = "name")
     String name;
 
-    @Schema(description = "图片类型")
-    @TableField("type")
-    @Column(name = "type")
-    String type;
-
     @Schema(description = "图片宽度")
     @TableField("width")
     @Column(name = "width")

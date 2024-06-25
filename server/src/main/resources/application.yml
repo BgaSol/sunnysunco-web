@@ -28,7 +28,7 @@ spring:
     username: sunnysunco
     password: sunnysunco
     hikari:
-      pool-name: MyHikariCP # 连接池名称
+      #      pool-name: MyHikariCP # 连接池名称
       minimum-idle: 50 # 最小空闲连接数
       maximum-pool-size: 1000 # 最大连接数
       idle-timeout: 30000 # 空闲连接超时时间
@@ -42,8 +42,8 @@ spring:
       ddl-auto: update
   servlet:
     multipart:
-      max-file-size: 100MB
-      max-request-size: 101MB
+      max-file-size: 3GB
+      max-request-size: 3GB
 springdoc:
   swagger-ui:
     enabled: true # 是否启用swagger-ui

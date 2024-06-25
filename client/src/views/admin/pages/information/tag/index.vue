@@ -80,8 +80,8 @@ const {
           </el-table-column>
           <el-table-column align='center' label='标签组' prop='tagGroup'>
           </el-table-column>
-          <el-table-column align='center' label='创建时间' prop='createTime' width='180'>
-            <template #default='{ row }:{row:TagEntity}'>
+          <el-table-column align='center' label='创建时间' prop='createTime' min-width='180'>
+            <template #default='{ row }'>
               {{ dayjs(row.createTime).format('YYYY-MM-DD HH:mm:ss') }}
             </template>
           </el-table-column>

@@ -43,6 +43,10 @@ public abstract class BaseCreateDto<ENTITY extends BaseEntity> {
      */
     @Schema(hidden = true)
     public String initId(ENTITY entity) {
-        return DefaultIdentifierGenerator.getInstance().nextUUID(entity);
+        return staticInitId(entity);
+    }
+
+    public static String staticInitId(Object obj) {
+        return DefaultIdentifierGenerator.getInstance().nextUUID(obj);
     }
 }

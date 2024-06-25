@@ -61,7 +61,7 @@ const updatePasswordRef = ref<InstanceType<typeof UpdatePassword>>();
                class="mt-auto mb-auto mr-20px" inactive-action-icon="Moon">
     </el-switch>
     <el-menu-item @click="$router.push({name:'home'})">客户端</el-menu-item>
-    <el-sub-menu>
+    <el-sub-menu index="other-menus">
       <template #title>{{ user.user?.username }}</template>
       <el-menu-item @click="updatePasswordRef?.openDialog">修改密码</el-menu-item>
       <update-password ref="updatePasswordRef"/>

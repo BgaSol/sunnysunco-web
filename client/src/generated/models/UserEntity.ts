@@ -11,6 +11,10 @@ import type { RoleEntity } from './RoleEntity';
 export type UserEntity = {
     id?: string;
     /**
+     * 类型
+     */
+    type?: string;
+    /**
      * 排序
      */
     sort?: number;
@@ -23,13 +27,13 @@ export type UserEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
+    /**
+     * 可访问该行数据的角色
+     */
+    accessRole?: Array<RoleEntity>;
     /**
      * 用户名
      */

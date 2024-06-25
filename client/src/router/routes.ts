@@ -5,21 +5,24 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/',
         name: 'home',
         redirect: {
-            name: "app_home" // 如果首页为动态的自定义页面则改为 'app_client_page'
+            name: "app_client_page" // 如果首页为动态的自定义页面则改为 'app_client_page'
         }
     },
     {
         path: '/app',
         component: () => import('~/views/app/pages/index.vue'),
+        redirect: {
+            name: "app_client_page"
+        },
         children: [
-            {
-                path: '',
-                name: 'app_home',
-                components: {
-                    default: () => import('~/views/app/pages/home/index.vue'),
-                    header: () => import('~/views/app/layout/AppHeader.vue'),
-                }
-            },
+            // {
+            //     path: '',
+            //     name: 'app_home',
+            //     components: {
+            //         default: () => import('~/views/app/pages/home/index.vue'),
+            //         header: () => import('~/views/app/layout/AppHeader.vue'),
+            //     }
+            // },
             {
                 path: 'client_page',
                 name: "app_client_page",
@@ -43,9 +46,9 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 path: '',
                 name: 'admin_home',
                 components: {
-                    default: () => import('~/views/admin/layout/Home.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    default: () => import('~/views/admin/layout/AdminHome.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 }
             },
             {
@@ -53,8 +56,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_user',
                 components: {
                     default: () => import('~/views/admin/pages/auth/user/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -62,8 +65,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_role',
                 components: {
                     default: () => import('~/views/admin/pages/auth/role/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -71,8 +74,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_permission',
                 components: {
                     default: () => import('~/views/admin/pages/auth/permission/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -80,8 +83,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_menu',
                 components: {
                     default: () => import('~/views/admin/pages/auth/menu/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -89,8 +92,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_log',
                 components: {
                     default: () => import('~/views/admin/pages/information/log/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -98,8 +101,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_image',
                 components: {
                     default: () => import('~/views/admin/pages/information/image/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -107,8 +110,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_client_page',
                 components: {
                     default: () => import('~/views/admin/pages/auth/client-page/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -116,8 +119,8 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_department',
                 components: {
                     default: () => import('~/views/admin/pages/auth/department/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
             },
             {
@@ -125,10 +128,10 @@ const routes: Readonly<RouteRecordRaw[]> = [
                 name: 'admin_tag',
                 components: {
                     default: () => import('~/views/admin/pages/information/tag/index.vue'),
-                    menu: () => import('~/views/admin/layout/Menu.vue'),
-                    header: () => import('~/views/admin/layout/Header.vue'),
+                    menu: () => import('~/views/admin/layout/AdminMenu.vue'),
+                    header: () => import('~/views/admin/layout/AdminHeader.vue'),
                 },
-            }
+            },
         ]
     },
     {

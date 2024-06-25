@@ -11,7 +11,6 @@ export const useMenu = defineStore('menu', () => {
     const menus = ref<MenuEntity[]>([]);
     const getMenuList = async () => {
         const menuList = await Service.findAdminMenuGroup()
-        console.log(menuList)
         menus.value = <MenuEntity[]>menuList.data;
     }
     const collapse = ref<boolean>(false);

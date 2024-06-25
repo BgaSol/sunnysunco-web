@@ -229,7 +229,7 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
             }
             // 反射获取entity的所有字段
             Class<? extends BaseEntity> entityClass = entity.getClass();
-            Field[] fields = entityClass.getDeclaredFields();
+            List<Field> fields = FieldUtils.getAllFieldsList(entityClass);
             for (Field field : fields) {
                 // 判断字段是否有注解
                 if (field.isAnnotationPresent(JoinTable.class)) {

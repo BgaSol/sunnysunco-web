@@ -1,4 +1,4 @@
-package com.sunnysunco.cloud.business.information.log;
+package com.sunnysunco.cloud.business.information.log.log;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
@@ -56,8 +56,13 @@ public class LogInterceptors implements HandlerInterceptor {
             String loginIdAsString = StpUtil.getLoginIdAsString();
             logEntity.setUserId(loginIdAsString);
         } catch (NotLoginException ignored) {
+            log.info("未登录");
         }
-        logService.save(logEntity);
+        try {
+            logService.save(logEntity);
+        } catch (RuntimeException e) {
+            log.info("保存日志失败", e);
+        }
         // 返回true，继续执行 如果返回false则中断
         return true;
     }

@@ -42,10 +42,4 @@ public class PermissionEntity extends BaseTreeEntity<PermissionEntity> {
     @Column(name = "status")
     @TableField("status")
     private Integer status;
-
-    @Schema(description = "权限类型")
-    @Column(name = "type")
-    @TableField("type")
-    private Integer type;
-
 }

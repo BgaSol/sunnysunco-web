@@ -38,11 +38,6 @@ public class RoleEntity extends BaseEntity {
     @Column(name = "status")
     private Integer status;
 
-    @Schema(description = "角色类型")
-    @TableField("type")
-    @Column(name = "type")
-    private Integer type;
-
     @Schema(description = "角色权限")
     @TableField(exist = false)
     @ManyToMany(targetEntity = PermissionEntity.class)

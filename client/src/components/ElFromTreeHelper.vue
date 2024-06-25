@@ -59,7 +59,6 @@ const getTreeAllKeys = (treeData: any[], nodeKey: string) => {
 };
 
 const expandTree = (checked: CheckboxValueType) => {
-  console.log(treeRef.value)
   if (checked) {
 
   }
@@ -83,7 +82,6 @@ const expandTree = (checked: CheckboxValueType) => {
     </el-tree>
   </el-form-item>
 </template>
-
 <style lang="scss" scoped>
 
 </style>

@@ -1,7 +1,7 @@
 <script lang='ts' setup>
 
 import {useMenu} from "~/pinia/modules/menu";
-import MenuNode from "./MenuNode.vue";
+import AdminMenuNode from "~/views/admin/layout/AdminMenuNode.vue";
 
 const menu = useMenu();
 menu.getMenuList();
@@ -10,7 +10,7 @@ menu.getMenuList();
 <template>
   <el-menu :collapse='menu.collapse' :default-active='String(menu.activeMenu)' class="h-full" mode='vertical'>
     <template v-for='menuItem in menu.menus' :key='menu.id'>
-      <menu-node v-if='!menuItem.isHidden' :menu='menuItem'></menu-node>
+      <admin-menu-node v-if='!menuItem.isHidden' :menu='menuItem'></admin-menu-node>
     </template>
   </el-menu>
 </template>

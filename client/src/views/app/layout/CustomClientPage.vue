@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {ref, watch} from "vue";
 import {ClientPageEntity, Service} from "~/generated";
 import {getMyClientPageImageUrl} from "~/api/HttpRequest";
+import Home from "~/views/app/pages/home/index.vue";
 
 const route = useRoute();
+const router = useRouter();
 const clientPage = ref<ClientPageEntity>({});
 
 watch(route, async () => {
@@ -22,10 +24,13 @@ watch(route, async () => {
 </script>
 
 <template>
-  <transition-group enter-active-class="animate__animated animate__zoomInRight">
-    <el-image v-for="image in clientPage.images"
-              :key="image.id" :src="getMyClientPageImageUrl(image.id as string)"
-              class="w-full pointer-events-none el-image-block important-block">
-    </el-image>
-  </transition-group>
+  <template v-if="route.query?.page">
+    <transition-group enter-active-class="animate__animated animate__zoomInRight">
+      <el-image v-for="image in clientPage.images"
+                :key="image.id" :src="getMyClientPageImageUrl(image.id as string)"
+                class="w-full pointer-events-none el-image-block important-block">
+      </el-image>
+    </transition-group>
+  </template>
+  <home v-else/>
 </template>

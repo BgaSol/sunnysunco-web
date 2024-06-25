@@ -15,7 +15,7 @@ const selectMenu = async () => {
 </script>
 
 <template>
-  <el-sub-menu v-if='props.menu.type===MenuEntity.type.MENU && props.menu.children?.length'
+  <el-sub-menu v-if='props.menu.menuType===MenuEntity.menuType.MENU && props.menu.children?.length'
                :disabled='props.menu.isDisabled' :index='String(props.menu.id)'>
     <template #title>
       <el-icon>
@@ -24,10 +24,10 @@ const selectMenu = async () => {
       <span>{{ props.menu.name }}</span>
     </template>
     <template v-for='menu in props.menu.children' :key='menu.id'>
-      <menu-node v-if='!menu.isHidden' :menu='menu'></menu-node>
+      <admin-menu-node v-if='!menu.isHidden' :menu='menu'></admin-menu-node>
     </template>
   </el-sub-menu>
-  <el-menu-item v-else-if='props.menu.type===MenuEntity.type.PAGE' :disabled='props.menu.isDisabled'
+  <el-menu-item v-else-if='props.menu.menuType===MenuEntity.menuType.PAGE' :disabled='props.menu.isDisabled'
                 :index='props.menu.routeName' @click='selectMenu'>
     <el-icon>
       <component :is='String(props.menu.icon)'></component>

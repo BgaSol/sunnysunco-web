@@ -3,11 +3,16 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { FileEntity } from './FileEntity';
+import type { RoleEntity } from './RoleEntity';
 /**
  * 图片实体类
  */
 export type ImageEntity = {
     id?: string;
+    /**
+     * 类型
+     */
+    type?: string;
     /**
      * 排序
      */
@@ -21,21 +26,17 @@ export type ImageEntity = {
      */
     updateTime?: string;
     /**
-     * 版本号
-     */
-    version?: number;
-    /**
      * 描述
      */
     description?: string;
     /**
+     * 可访问该行数据的角色
+     */
+    accessRole?: Array<RoleEntity>;
+    /**
      * 图片名称
      */
     name?: string;
-    /**
-     * 图片类型
-     */
-    type?: string;
     /**
      * 图片宽度
      */

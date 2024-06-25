@@ -23,18 +23,19 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
 <template>
   <div class='main'>
     <div class="controllers">
-      <base-batch-delete :api="Service.deletePermission" :table="tableRef" @success='getTable'></base-batch-delete>
+      <base-batch-delete v-if="tableRef" :api="Service.deletePermission" :table="tableRef" @success='getTable'>
+      </base-batch-delete>
     </div>
     <div class='table'>
       <div class='table-container'>
         <el-table ref='tableRef' v-loading='tableLoading' :data='tableData' border default-expand-all
                   height='100%' row-key='id' stripe>
           <el-table-column align="center" type='selection' width='44'></el-table-column>
+          <el-table-column label='权限描述' min-width='320' prop='description'></el-table-column>
           <el-table-column label='权限名称' min-width='220' prop='name'></el-table-column>
           <el-table-column label='权限编码' min-width='220' prop='code'></el-table-column>
-          <el-table-column label='权限路径' min-width='220' prop='path'></el-table-column>
-          <el-table-column label='权限描述' min-width='320' prop='description'>
-          </el-table-column>
+          <el-table-column label='请求路径' min-width='220' prop='path'></el-table-column>
+          <el-table-column label='请求方式' min-width='120' prop='type'></el-table-column>
           <el-table-column align='center' fixed="right" label='操作' width="160">
             <template #default='{ row }'>
               <base-delete :id="row.id" :api="Service.deletePermission" @success="getTable"/>

@@ -675,7 +675,7 @@ export class Service {
     public static findAdminMenuGroup(): CancelablePromise<BaseVoListMenuEntity> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/menu/admin-menu-group',
+            url: '/menu/find-admin-menu-group',
             errors: {
                 400: `参数校验异常`,
                 500: `业务异常`,
@@ -795,7 +795,7 @@ export class Service {
     public static getMyDepartment(): CancelablePromise<BaseVoDepartmentEntity> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/department/getMyDepartment',
+            url: '/department/get-my-department',
             errors: {
                 400: `参数校验异常`,
                 500: `业务异常`,
@@ -810,7 +810,7 @@ export class Service {
     public static findDefaultDepartment(): CancelablePromise<BaseVoDepartmentEntity> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/department/findByIdIsDefault',
+            url: '/department/find-by-id-is-default',
             errors: {
                 400: `参数校验异常`,
                 500: `业务异常`,
@@ -825,7 +825,7 @@ export class Service {
     public static downloadImage1(): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/department/downloadLogo',
+            url: '/department/download-logo',
             errors: {
                 400: `参数校验异常`,
                 500: `业务异常`,
@@ -861,7 +861,7 @@ export class Service {
     public static getMyClientPages(): CancelablePromise<BaseVoListClientPageEntity> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/client-page/getMyClientPages',
+            url: '/client-page/get-my-client-pages',
             errors: {
                 400: `参数校验异常`,
                 500: `业务异常`,
@@ -879,7 +879,7 @@ export class Service {
     ): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/client-page/getMyClientPageImage/{imageId}',
+            url: '/client-page/get-my-client-page-image/{imageId}',
             path: {
                 'imageId': imageId,
             },
@@ -995,7 +995,7 @@ export class Service {
         });
     }
     /**
-     * 删除菜单
+     * 删除日志
      * @param ids
      * @returns BaseVoInteger<any> OK
      * @throws ApiError

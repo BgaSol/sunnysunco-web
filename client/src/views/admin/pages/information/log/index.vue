@@ -64,17 +64,17 @@ const {
       <div class='table-container'>
         <el-table v-loading='tableLoading' :data='tableData.result' border height='100%' row-key='id'
                   stripe>
-          <el-table-column align='center' label='操作时间' prop='createTime' width='180'>
+          <el-table-column align='center' label='操作时间' prop='createTime' min-width='180'>
             <template #default='{ row }'>
               {{ dayjs(row.createTime).format('YYYY-MM-DD HH:mm:ss') }}
             </template>
           </el-table-column>
-          <el-table-column align='center' label='用户' prop='user.username' width='120'></el-table-column>
-          <el-table-column align='center' label='客户端ip' prop='ip' width='150'></el-table-column>
-          <el-table-column align='center' label='请求地址' prop='url' width='250'></el-table-column>
-          <el-table-column align='center' label='请求方式' prop='method' width='100'></el-table-column>
-          <el-table-column align='center' label='客户端浏览器' prop='browser' width='150'></el-table-column>
-          <el-table-column align='center' label='客户端操作系统' prop='os' width='150'></el-table-column>
+          <el-table-column align='center' label='用户' prop='user.username' min-width='120'></el-table-column>
+          <el-table-column align='center' label='客户端ip' prop='ip' min-width='150'></el-table-column>
+          <el-table-column align='center' label='请求地址' prop='url' min-width='250'></el-table-column>
+          <el-table-column align='center' label='请求方式' prop='method' min-width='100'></el-table-column>
+          <el-table-column align='center' label='客户端浏览器' prop='browser' min-width='150'></el-table-column>
+          <el-table-column align='center' label='客户端操作系统' prop='os' min-width='150'></el-table-column>
           <el-table-column align='center' label='请求来源' prop='referer'></el-table-column>
           <el-table-column align='center' fixed="right" label='操作' width='90'>
             <template #default='{ row }'>

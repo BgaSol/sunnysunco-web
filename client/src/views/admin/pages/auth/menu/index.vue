@@ -26,37 +26,38 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
 <template>
   <div class='main'>
     <div class="controllers">
-      <base-batch-delete :api="Service.deleteMenu" :table="tableRef" @success='getTable'></base-batch-delete>
+      <base-batch-delete v-if="tableRef"
+                         :api="Service.deleteMenu" :table="tableRef" @success='getTable'></base-batch-delete>
     </div>
     <div class='table'>
       <div class='table-container'>
         <el-table ref='tableRef' v-loading='tableLoading' :data='tableData' border default-expand-all height='100%'
                   row-key='id' stripe>
           <el-table-column align="center" type='selection' width='44'></el-table-column>
-          <el-table-column label='菜单名称' prop='name' width="210">
+          <el-table-column label='菜单名称' prop='name' min-width="210">
           </el-table-column>
-          <el-table-column align='center' label='菜单类型' width="90">
+          <el-table-column align='center' label='菜单类型' min-width="90">
             <template #default='{ row }'>
-              <el-tag v-if="row.type === MenuEntity.type.MENU">菜单</el-tag>
-              <el-tag v-else-if="row.type === MenuEntity.type.BUTTON" type='success'>按钮</el-tag>
-              <el-tag v-else-if="row.type === MenuEntity.type.PAGE" type='warning'>页面</el-tag>
+              <el-tag v-if="row.menuType === MenuEntity.menuType.MENU">菜单</el-tag>
+              <el-tag v-else-if="row.menuType === MenuEntity.menuType.BUTTON" type='success'>按钮</el-tag>
+              <el-tag v-else-if="row.menuType === MenuEntity.menuType.PAGE" type='warning'>页面</el-tag>
             </template>
           </el-table-column>
-          <el-table-column align='center' label='图标' width="90">
+          <el-table-column align='center' label='图标' min-width="90">
             <template #default='{ row }'>
               <component :is='row.icon' class="menu-icon"/>
             </template>
           </el-table-column>
-          <el-table-column align='center' label='路由名' prop='routeName' width="180">
+          <el-table-column align='center' label='路由名' prop='routeName' min-width="180">
           </el-table-column>
-          <el-table-column align='center' label='是否停用（置灰）' prop='isDisabled' width="150">
+          <el-table-column align='center' label='是否停用（置灰）' prop='isDisabled' min-width="150">
             <template #default='{ row }'>
               <el-tag :type="row.isDisabled?'danger':'success'">
                 {{ row.isDisabled ? '停用' : '启用' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column align='center' label='是否隐藏（不显示）' prop='isHidden' width="170">
+          <el-table-column align='center' label='是否隐藏（不显示）' prop='isHidden' min-width="170">
             <template #default='{ row }'>
               <el-tag :type="row.isHidden?'danger':'success'">
                 {{ row.isHidden ? '隐藏' : '显示' }}

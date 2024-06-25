@@ -1,7 +1,9 @@
 package com.sunnysunco.cloud.business.information.file;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.sunnysunco.cloud.business.auth.role.RoleEntity;
 import com.sunnysunco.cloud.business.base.BaseService;
+import com.sunnysunco.cloud.business.base.dto.BaseCreateDto;
 import com.sunnysunco.cloud.business.base.dto.BasePageDto;
 import com.sunnysunco.cloud.business.base.exception.BaseException;
 import com.sunnysunco.cloud.business.information.file.dto.CreateFileDto;
@@ -11,14 +13,19 @@ import io.minio.errors.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.activation.MimetypesFileTypeMap;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +40,8 @@ public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>
 
     private final MinioConfig minioConfig;
 
+    private final MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
+
     @Override
     public FileMapper commonBaseMapper() {
         return fileMapper;
@@ -41,6 +50,70 @@ public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>
     @Override
     public FileRepository commonBaseRepository() {
         return fileRepository;
+    }
+
+    /**
+     * 从本地路径保存文件
+     *
+     * @param file 文件
+     * @return 文件实体
+     */
+    @Transactional
+    public FileEntity save(File file, List<RoleEntity> roles) {
+        String hash;
+        // 获取文件hash
+        try {
+            FileInputStream fileInputStream = FileUtils.openInputStream(file);
+            hash = DigestUtils.sha256Hex(fileInputStream);
+            fileInputStream.close();
+        } catch (IOException e) {
+            throw new BaseException("获取文件hash失败");
+        }
+
+        FileEntity newFile = new FileEntity();
+        newFile.setHash(hash);
+        newFile.setId(BaseCreateDto.staticInitId(newFile));
+        newFile.setName(file.getName());
+        newFile.setSize(String.valueOf(file.length()));
+
+        newFile.setAccessRole(roles);
+
+        String mimeType = fileTypeMap.getContentType(file.getName());
+
+        newFile.setType(mimeType);
+        newFile.setBucket(minioConfig.getBucket());
+
+        newFile = this.save(newFile);
+        // 初始化inputStream
+        try {
+            FileInputStream fileInputStream = FileUtils.openInputStream(file);
+            // 创建上传文件参数
+            PutObjectArgs objectArgs = PutObjectArgs.builder()
+                    // 设置桶
+                    .bucket(newFile.getBucket())
+                    // 设置文件id
+                    .object(newFile.getId())
+                    // 设置文件流
+                    .stream(fileInputStream, file.length(), -1)
+                    // 设置文件类型
+                    .contentType(newFile.getType())
+                    .build();
+            // 上传文件到minio 文件名称相同会覆盖
+            minioClient.putObject(objectArgs);
+            fileInputStream.close();
+        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                 InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                 XmlParserException e) {
+            log.error("上传文件失败", e);
+            throw new BaseException("上传文件失败");
+        }
+        return newFile;
+    }
+
+    private FileEntity fileIsExist(String hash) {
+        QueryWrapper<FileEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("hash", hash);
+        return this.fileMapper.selectOne(queryWrapper);
     }
 
     /**
@@ -56,62 +129,46 @@ public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>
         FileEntity fileEntity = new FileEntity();
         fileEntity.setName(uploadFile.getOriginalFilename());
         fileEntity.setSize(String.valueOf(uploadFile.getSize()));
+
         fileEntity.setType(uploadFile.getContentType());
+
         fileEntity.setBucket(minioConfig.getBucket());
+
         fileEntity.setId(createFileDto.initId(fileEntity));
 
-        // 获取文件流
-        InputStream inputStream;
-        try {
-            inputStream = uploadFile.getInputStream();
-        } catch (IOException e) {
-            log.error("获取文件流失败", e);
-            throw new BaseException("获取文件流失败");
-        }
         // 获取文件hash
         try {
+            InputStream inputStream = uploadFile.getInputStream();
             String hex = DigestUtils.sha256Hex(inputStream);
             fileEntity.setHash(hex);
+            inputStream.close();
         } catch (IOException e) {
             throw new BaseException("获取文件hash失败");
         }
-        // 判断文件是否存在
-        QueryWrapper<FileEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("hash", fileEntity.getHash());
-        FileEntity file = this.fileMapper.selectOne(queryWrapper);
-        if (file != null) {
-            return file;
-        }
-        // 保存文件信息到数据库
-        FileEntity saveEntity = this.save(fileEntity);
-        // 初始化inputStream
+        fileEntity = this.save(fileEntity);
         try {
-            inputStream = uploadFile.getInputStream();
-        } catch (IOException e) {
-            log.error("获取文件流失败", e);
-            throw new BaseException("获取文件流失败");
-        }
-        // 创建上传文件参数
-        PutObjectArgs objectArgs = PutObjectArgs.builder()
-                // 设置桶
-                .bucket(fileEntity.getBucket())
-                // 设置文件id
-                .object(fileEntity.getId())
-                // 设置文件流
-                .stream(inputStream, uploadFile.getSize(), -1)
-                // 设置文件类型
-                .contentType(fileEntity.getType())
-                .build();
-        try {
+            InputStream inputStream = uploadFile.getInputStream();
+            // 创建上传文件参数
+            PutObjectArgs objectArgs = PutObjectArgs.builder()
+                    // 设置桶
+                    .bucket(fileEntity.getBucket())
+                    // 设置文件id
+                    .object(fileEntity.getId())
+                    // 设置文件流
+                    .stream(inputStream, uploadFile.getSize(), -1)
+                    // 设置文件类型
+                    .contentType(fileEntity.getType())
+                    .build();
             // 上传文件到minio 文件名称相同会覆盖
             minioClient.putObject(objectArgs);
+            inputStream.close();
         } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
                  InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
                  XmlParserException e) {
             log.error("上传文件失败", e);
             throw new BaseException("上传文件失败");
         }
-        return saveEntity;
+        return fileEntity;
     }
 
     /**
@@ -122,15 +179,15 @@ public class FileService extends BaseService<FileEntity, BasePageDto<FileEntity>
      */
     @Transactional(readOnly = true)
     public GetObjectResponse getFileStream(String id) {
-        FileEntity byId = this.findById(id);
-        if (byId == null) {
+        FileEntity file = this.findById(id);
+        if (file == null) {
             throw new BaseException("文件不存在");
         }
         try {
             GetObjectArgs build = GetObjectArgs
                     .builder()
-                    .bucket(byId.getBucket())
-                    .object(byId.getId())
+                    .bucket(file.getBucket())
+                    .object(file.getId())
                     .build();
             // 获取文件流
             return minioClient.getObject(build);

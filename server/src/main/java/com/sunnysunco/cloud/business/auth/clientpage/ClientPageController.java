@@ -86,7 +86,7 @@ public class ClientPageController extends BaseController<
         return super.findAll();
     }
 
-    @GetMapping("/getMyClientPages")
+    @GetMapping("/get-my-client-pages")
     @Operation(summary = "查询我的页面", operationId = "getMyClientPages")
     public BaseVo<List<ClientPageEntity>> getMyPages(HttpServletRequest request) {
         // 获取域名
@@ -95,7 +95,7 @@ public class ClientPageController extends BaseController<
         return BaseVo.success(myClientPages);
     }
 
-    @GetMapping("/getMyClientPageImage/{imageId}")
+    @GetMapping("/get-my-client-page-image/{imageId}")
     @Operation(summary = "查询我的页面图片", operationId = "getMyClientPageImage")
     public ResponseEntity<InputStreamResource> getMyClientPageImage(HttpServletRequest request, @PathVariable String imageId) {
         // 获取域名

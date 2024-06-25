@@ -31,7 +31,8 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
   <div class='main'>
     <div class="controllers">
       <create-department @success="getTable"></create-department>
-      <base-batch-delete :api="Service.deleteDepartment" :table="tableRef" @success='getTable'></base-batch-delete>
+      <base-batch-delete v-if="tableRef"
+                         :api="Service.deleteDepartment" :table="tableRef" @success='getTable'></base-batch-delete>
     </div>
     <div class='table'>
       <div class='table-container'>

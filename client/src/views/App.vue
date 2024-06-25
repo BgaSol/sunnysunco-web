@@ -1,9 +1,9 @@
 <script setup>
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import {useDark, useTitle} from "@vueuse/core";
+import {useDark} from "@vueuse/core";
 
 const dark = useDark()
-useTitle('SunnySunCo')
+
 </script>
 <template>
   <el-config-provider :locale="zhCn">

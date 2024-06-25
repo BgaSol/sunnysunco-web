@@ -69,7 +69,8 @@ const tableRef = ref<InstanceType<typeof ElTableRefType>>();
     </div>
     <div class='controllers'>
       <create-image @success="getTable"></create-image>
-      <base-batch-delete :api="Service.deleteImage" :table="tableRef" @success='getTable'></base-batch-delete>
+      <base-batch-delete v-if="tableRef"
+                         :api="Service.deleteImage" :table="tableRef" @success='getTable'></base-batch-delete>
     </div>
     <div class='table'>
       <div class='table-container'>
