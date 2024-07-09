@@ -41,7 +41,9 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
             cls = cls.getSuperclass();
         }
         ParameterizedType type = (ParameterizedType) cls.getGenericSuperclass();
-        return (Class<ENTITY>) type.getActualTypeArguments()[0];
+        @SuppressWarnings("unchecked")
+        Class<ENTITY> entityClass = (Class<ENTITY>) type.getActualTypeArguments()[0];
+        return entityClass;
     }
 
     /**
@@ -63,11 +65,6 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
             if (field.isAnnotationPresent(Transient.class)
                     && field.getName().toLowerCase().endsWith("id")
                     && field.isAnnotationPresent(TableField.class)) {
-                // 获取TableField注解
-//                TableField tableField = field.getAnnotation(TableField.class);
-                // 获取字段名
-                // String tableFieldName = tableField.value();
-                // 获取字段的值
                 field.setAccessible(true);
                 Object value;
                 try {
@@ -108,14 +105,8 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
                     throw new BaseException("获取字段值失败");
                 }
                 if (value != null) {
-                    List<BaseEntity> childrenEntities = (List<BaseEntity>) value;
-                    for (BaseEntity childrenEntity : childrenEntities) {
-                        // 获取中间表字段的值
-                        String masterValue = entity.getId();
-                        String slaveValue = childrenEntity.getId();
-                        // 插入中间表
-                        commonBaseMapper().insertIntoTable(tableName, masterName, masterValue, slaveName, slaveValue);
-                    }
+                    @SuppressWarnings("unchecked") List<BaseEntity> entities = (List<BaseEntity>) value;
+                    insertIntoTable(entity, tableName, masterName, slaveName, entities);
                 }
             }
         }
@@ -200,18 +191,22 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
                 if (value != null) {
                     // 删除中间表的数据
                     commonBaseMapper().deleteFromTable(tableName, masterName, entity.getId());
-                    List<BaseEntity> childrenEntities = (List<BaseEntity>) value;
-                    for (BaseEntity childrenEntity : childrenEntities) {
-                        // 获取中间表字段的值
-                        String masterValue = entity.getId();
-                        String slaveValue = childrenEntity.getId();
-                        // 插入中间表
-                        commonBaseMapper().insertIntoTable(tableName, masterName, masterValue, slaveName, slaveValue);
-                    }
+                    @SuppressWarnings("unchecked") List<BaseEntity> entities = (List<BaseEntity>) value;
+                    insertIntoTable(entity, tableName, masterName, slaveName, entities);
                 }
             }
         }
         return this.findById(entity.getId());
+    }
+
+    private void insertIntoTable(ENTITY entity, String tableName, String masterName, String slaveName, List<BaseEntity> value) {
+        for (BaseEntity childrenEntity : value) {
+            // 获取中间表字段的值
+            String masterValue = entity.getId();
+            String slaveValue = childrenEntity.getId();
+            // 插入中间表
+            commonBaseMapper().insertIntoTable(tableName, masterName, masterValue, slaveName, slaveValue);
+        }
     }
 
     /**
@@ -310,6 +305,4 @@ public abstract class BaseService<ENTITY extends BaseEntity, PAGE_DTO extends Ba
         String tableName = entityClass.getAnnotation(Table.class).name();
         this.commonBaseMapper().truncateTable(tableName);
     }
-
-
 }
