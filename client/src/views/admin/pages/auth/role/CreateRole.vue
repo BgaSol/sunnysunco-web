@@ -78,11 +78,11 @@ const submitForm = () => {
       <el-form-item :error='errData.code' label='角色编码' required>
         <el-input v-model='data.code' placeholder='请输入角色编码'></el-input>
       </el-form-item>
-      <el-from-tree-helper v-if="data.permissionIds"
+      <el-from-tree-helper v-if="data.permissionIds && visible"
                            v-model='data.permissionIds as string[]' :error='errData.permissionIds'
                            :props='rolePermissionTreeProps' :treeData='permissionList'
                            label='接口权限' nodeKey='id'/>
-      <el-from-tree-helper v-if="data.menuIds"
+      <el-from-tree-helper v-if="data.menuIds && visible"
                            v-model='data.menuIds as string[]' :error='errData.menuIds'
                            :props='roleMenuTreeProps' :treeData='menuList'
                            label='菜单权限' nodeKey='id'/>

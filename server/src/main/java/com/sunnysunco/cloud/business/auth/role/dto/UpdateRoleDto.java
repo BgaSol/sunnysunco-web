@@ -7,8 +7,6 @@ import com.sunnysunco.cloud.business.base.dto.BaseUpdateDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.ObjectUtils;
-
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +35,7 @@ public class UpdateRoleDto extends BaseUpdateDto<RoleEntity> {
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setName(name);
         roleEntity.setCode(code);
-        if (ObjectUtils.isNotEmpty(permissionIds)) {
+        if (permissionIds != null) {
             Stream<PermissionEntity> permissionEntityStream = permissionIds.stream().map((id) -> {
                 PermissionEntity permissionEntity = new PermissionEntity();
                 permissionEntity.setId(id);
@@ -46,7 +44,7 @@ public class UpdateRoleDto extends BaseUpdateDto<RoleEntity> {
             List<PermissionEntity> collect = permissionEntityStream.collect(Collectors.toList());
             roleEntity.setPermissions(collect);
         }
-        if (ObjectUtils.isNotEmpty(menuIds)) {
+        if (menuIds != null) {
             Stream<MenuEntity> menuEntityStream = menuIds.stream().map((id) -> {
                 MenuEntity menuEntity = new MenuEntity();
                 menuEntity.setId(id);

@@ -55,7 +55,7 @@ public class UpdateUserDto extends BaseUpdateDto<UserEntity> {
         } else {
             user.setDepartmentId("default");
         }
-        if (ObjectUtils.isNotEmpty(roleIds)) {
+        if (roleIds != null) {
             Stream<RoleEntity> roleEntityStream = roleIds.stream().map((id) -> {
                 RoleEntity roleEntity = new RoleEntity();
                 roleEntity.setId(id);

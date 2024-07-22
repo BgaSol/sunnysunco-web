@@ -6,7 +6,6 @@ import com.sunnysunco.cloud.business.information.image.ImageEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.ObjectUtils;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -37,7 +36,7 @@ public class CreateClientPageDto extends BaseCreateDto<ClientPageEntity> {
         ClientPageEntity entity = new ClientPageEntity();
         entity.setName(name);
         entity.setHtml(html);
-        if (ObjectUtils.isNotEmpty(imageIds)) {
+        if (imageIds != null) {
             Stream<ImageEntity> imageEntityStream = imageIds.stream().map((id) -> {
                 ImageEntity imageEntity = new ImageEntity();
                 imageEntity.setId(id);

@@ -91,7 +91,7 @@ const getDepartmentTree = async () => {
       <el-form-item :error="errData.code" label="编码">
         <el-input v-model='data.code' placeholder='请输入编码'></el-input>
       </el-form-item>
-      <el-from-tree-helper v-if="data.pageIds" v-model='data.pageIds as string[]' :error='errData.pageIds'
+      <el-from-tree-helper v-if="data.pageIds && visible" v-model='data.pageIds as string[]' :error='errData.pageIds'
                            :props='departmentPageTreeProps' :treeData='clientPageList'
                            label='部门页面' nodeKey='id'/>
       <el-form-item :error="errData.domain" label="域名">

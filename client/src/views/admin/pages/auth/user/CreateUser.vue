@@ -83,7 +83,7 @@ const getDepartmentTree = async () => {
                      class="w-full" clearable placeholder="请选择上级部门">
         </el-cascader>
       </el-form-item>
-      <el-from-tree-helper v-if="data.roleIds" v-model='data.roleIds as string[]' :error='errData.roleIds'
+      <el-from-tree-helper v-if="data.roleIds && visible" v-model='data.roleIds as string[]' :error='errData.roleIds'
                            :props='userRoleTreeProps' :treeData='roleList'
                            label='角色' nodeKey='id'/>
       <el-form-item :error='errData.locked' label='账户锁定' required>

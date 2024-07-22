@@ -6,7 +6,6 @@ import com.sunnysunco.cloud.business.base.dto.BaseUpdateDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,7 +48,7 @@ public class UpdateDepartmentDto extends BaseUpdateDto<DepartmentEntity> {
         departmentEntity.setName(name);
         departmentEntity.setCode(code);
         departmentEntity.setDomain(domain);
-        if (ObjectUtils.isNotEmpty(pageIds)) {
+        if (pageIds != null) {
             Stream<ClientPageEntity> clientPageEntityStream = pageIds.stream().map((id) -> {
                 ClientPageEntity clientPageEntity = new ClientPageEntity();
                 clientPageEntity.setId(id);

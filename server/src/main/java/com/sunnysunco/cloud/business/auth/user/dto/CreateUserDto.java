@@ -61,7 +61,7 @@ public class CreateUserDto extends BaseCreateDto<UserEntity> {
         } else {
             user.setDepartmentId("default");
         }
-        if (ObjectUtils.isNotEmpty(roleIds)) {
+        if (roleIds != null) {
             Stream<RoleEntity> roleEntityStream = roleIds.stream().map((id) -> {
                 RoleEntity roleEntity = new RoleEntity();
                 roleEntity.setId(id);

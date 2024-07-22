@@ -38,7 +38,7 @@ export const getImageUrl = (id: string) => {
  * 获取我的部门的logo的url
  */
 export const getMyDepartmentLogoUrl = () => {
-    return `${BaseUrl}/department/downloadLogo?${getHeadersString()}`
+    return `${BaseUrl}/department/download-logo?${getHeadersString()}`
 }
 
 /**
@@ -46,7 +46,7 @@ export const getMyDepartmentLogoUrl = () => {
  * @param imageId 图片id
  */
 export const getMyClientPageImageUrl = (imageId: string) => {
-    return `${BaseUrl}/client-page/getMyClientPageImage/${imageId}?${getHeadersString()}`
+    return `${BaseUrl}/client-page/get-my-client-page-image/${imageId}?${getHeadersString()}`
 }
 
 /**
@@ -59,6 +59,7 @@ export const buildDto = <DTO>(defaultDto: DTO, dto: DTO) => {
     const data = {...defaultDto}
     for (const key in dto) {
         if ((dto[key] !== undefined) && (dto[key] !== null)) {
+            // 判断其是否是代理对象
             data[key] = dto[key]
         }
     }
