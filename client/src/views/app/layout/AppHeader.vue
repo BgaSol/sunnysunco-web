@@ -2,7 +2,7 @@
 import {useUser} from "~/pinia/modules/user";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 import {useMenu} from "~/pinia/modules/menu";
-import {useDark} from "@vueuse/core";
+import {useDark, useMediaQuery} from "@vueuse/core";
 import UpdatePassword from "~/views/admin/pages/auth/user/UpdatePassword.vue";
 import {useRoute, useRouter} from "vue-router";
 
@@ -42,7 +42,7 @@ const checkActiveMenu = (id: string) => {
 }
 // 页面初始化时，如果没有page参数，就默认选中第一个
 watch(clientPageList, () => {
-  if (clientPageList.value.length > 0){
+  if (clientPageList.value.length > 0) {
     if (!route.query.page && route.name === 'app_client_page') {
       nextTick(() => {
         checkActiveMenu(clientPageList.value[0].id as string)
@@ -54,6 +54,9 @@ watch(clientPageList, () => {
 const toPage = (name: string) => {
   router.push({name});
 }
+
+const isPc = useMediaQuery('(min-width: 768px)')
+const drawer = ref(false)
 </script>
 
 <template>
@@ -65,26 +68,60 @@ const toPage = (name: string) => {
         {{ user.departmentLogoAndName.logoName }}
       </div>
     </el-menu-item>
-<!--    <el-menu-item @click="toPage('app_home')" index="app_home">首页</el-menu-item>-->
-    <el-menu-item v-for="page in clientPageList" :key="page.id" :index="page.id" :page="page.id"
-                  @click="checkActiveMenu(page.id as string)">
-      {{ page.name }}
-    </el-menu-item>
-    <div class="flex-grow"/>
-    <el-switch v-model="isDark" active-action-icon="Sunny"
-               class="mt-auto mb-auto mr-4" inactive-action-icon="Moon">
-    </el-switch>
-    <el-menu-item v-if="isBackend" @click="$router.replace({name:'admin_home'})">后台管理</el-menu-item>
-    <el-sub-menu v-if="user.userToken" index="users">
-      <template #title>{{ user.user?.username }}</template>
-      <el-menu-item @click="updatePasswordRef?.openDialog">修改密码</el-menu-item>
-      <update-password ref="updatePasswordRef"/>
-      <el-menu-item @click="user.logout(()=>$router.replace({name:'home'}))">
-        退出登录
+    <template v-if="isPc">
+      <!--    <el-menu-item @click="toPage('app_home')" index="app_home">首页</el-menu-item>-->
+      <el-menu-item v-for="page in clientPageList" :key="page.id" :index="page.id" :page="page.id"
+                    @click="checkActiveMenu(page.id as string)">
+        {{ page.name }}
       </el-menu-item>
-    </el-sub-menu>
-    <el-menu-item v-if="(route.name!=='login')&&!user.userToken" @click="login">
-      登录
-    </el-menu-item>
+      <div class="flex-grow"/>
+      <el-switch v-model="isDark" active-action-icon="Sunny"
+                 class="mt-auto mb-auto mr-4" inactive-action-icon="Moon">
+      </el-switch>
+      <el-menu-item v-if="isBackend" @click="$router.replace({name:'admin_home'})">后台管理</el-menu-item>
+      <el-sub-menu v-if="user.userToken" index="users">
+        <template #title>{{ user.user?.username }}</template>
+        <el-menu-item @click="updatePasswordRef?.openDialog">修改密码</el-menu-item>
+        <update-password ref="updatePasswordRef"/>
+        <el-menu-item @click="user.logout(()=>$router.replace({name:'home'}))">
+          退出登录
+        </el-menu-item>
+      </el-sub-menu>
+      <el-menu-item v-if="(route.name!=='login')&&!user.userToken" @click="login">
+        登录
+      </el-menu-item>
+    </template>
+    <template v-if="!isPc">
+      <div class="flex-grow"/>
+      <el-switch v-model="isDark" active-action-icon="Sunny"
+                 class="mt-auto mb-auto mr-4" inactive-action-icon="Moon">
+      </el-switch>
+      <el-menu-item v-if="(route.name!=='login')" @click="drawer = true">
+        <el-icon>
+          <Memo/>
+        </el-icon>
+      </el-menu-item>
+      <el-drawer v-model="drawer" size="50%" direction="ttb" :with-header="false">
+        <el-menu :default-active="activeMenu" mode="vertical">
+          <!--    <el-menu-item @click="toPage('app_home')" index="app_home">首页</el-menu-item>-->
+          <el-menu-item v-for="page in clientPageList" :key="page.id" :index="page.id" :page="page.id"
+                        @click="checkActiveMenu(page.id as string)">
+            {{ page.name }}
+          </el-menu-item>
+          <el-menu-item v-if="isBackend" @click="$router.replace({name:'admin_home'})">后台管理</el-menu-item>
+          <el-sub-menu v-if="user.userToken" index="users">
+            <template #title>{{ user.user?.username }}</template>
+            <el-menu-item @click="updatePasswordRef?.openDialog">修改密码</el-menu-item>
+            <update-password ref="updatePasswordRef"/>
+            <el-menu-item @click="user.logout(()=>$router.replace({name:'home'}))">
+              退出登录
+            </el-menu-item>
+          </el-sub-menu>
+          <el-menu-item v-if="(route.name!=='login')&&!user.userToken" @click="login">
+            登录
+          </el-menu-item>
+        </el-menu>
+      </el-drawer>
+    </template>
   </el-menu>
 </template>
