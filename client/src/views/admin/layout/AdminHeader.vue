@@ -37,13 +37,13 @@ const updatePasswordRef = ref<InstanceType<typeof UpdatePassword>>();
 
 <template>
   <el-menu :default-active="menu.activeMenu" :ellipsis="false" mode="horizontal">
-    <el-icon class='m-auto important-w-64px cursor-pointer' @click='menu.collapse = !menu.collapse'>
+    <el-icon class='mt-auto mb-auto important-w-64px cursor-pointer' @click='menu.collapse = !menu.collapse'>
       <component :is='menu.collapse ? "Expand":"Fold"'/>
     </el-icon>
     <el-menu-item v-if="user.user?.department" @click="$router.push({name:'admin_home'})">
       <el-image v-if="user?.user?.department?.icon?.id" fit="contain"
                 :src="getImageUrl(user.user.department.icon.id as string)"
-                class="h-9 m-auto el-image-block"></el-image>
+                class="h-9 mt-auto mb-auto el-image-block"></el-image>
       <div v-if="user.user?.department?.name" class="title important-ml-4 font-bold font-size-5">
         {{ user.user?.department?.name }}
       </div>

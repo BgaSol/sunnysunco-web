@@ -63,7 +63,7 @@ const drawer = ref(false)
   <el-menu :default-active="activeMenu" :ellipsis="false" mode="horizontal">
     <el-menu-item @click="$router.push({name:'home'})">
       <el-image v-if="user.departmentLogoAndName.isShowLogo" :src="user.departmentLogoAndName.logoUrl"
-                class="h-9 m-auto el-image-block" fit="contain"></el-image>
+                class="h-9 mt-auto mb-auto el-image-block" fit="contain"></el-image>
       <div v-if="user.departmentLogoAndName.isShowLogoName" class="title important-ml-4 font-bold font-size-6">
         {{ user.departmentLogoAndName.logoName }}
       </div>
