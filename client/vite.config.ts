@@ -7,6 +7,7 @@ import UnoCss from 'unocss/vite';
 
 import * as OpenAPI from "openapi-typescript-codegen";
 import {HttpClient} from "openapi-typescript-codegen";
+import {ViteImageOptimizer} from "vite-plugin-image-optimizer";
 
 const pathSrc = path.resolve(__dirname, 'src');
 
@@ -24,6 +25,17 @@ export default defineConfig({
         },
     },
     plugins: [
+        ViteImageOptimizer({
+            png: {
+                quality: 100,
+            },
+            jpg: {
+                quality: 100,
+            },
+            jpeg: {
+                quality: 100,
+            }
+        }),
         vue(),
         Components({
             extensions: ['vue', 'md'],

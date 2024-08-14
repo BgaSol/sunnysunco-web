@@ -41,7 +41,8 @@ const updatePasswordRef = ref<InstanceType<typeof UpdatePassword>>();
       <component :is='menu.collapse ? "Expand":"Fold"'/>
     </el-icon>
     <el-menu-item v-if="user.user?.department" @click="$router.push({name:'admin_home'})">
-      <el-image v-if="user?.user?.department?.icon?.id" :src="getImageUrl(user.user.department.icon.id as string)"
+      <el-image v-if="user?.user?.department?.icon?.id" fit="contain"
+                :src="getImageUrl(user.user.department.icon.id as string)"
                 class="h-9 m-auto el-image-block"></el-image>
       <div v-if="user.user?.department?.name" class="title important-ml-4 font-bold font-size-5">
         {{ user.user?.department?.name }}
