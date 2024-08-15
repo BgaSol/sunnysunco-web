@@ -28,14 +28,14 @@ public class SystemPerformanceMonitoring {
     private final GpuPerformanceService gpuPerformanceService;
 
     @Async
-    @Scheduled(fixedRate = 5 * 1000, initialDelay = 10 * 1000)
+    @Scheduled(cron = "${performance.monitoring.cpu.cron}")
     public void getCpuPerformance() {
         CPUPerformanceDto cpuAndMemoryData = performanceMonitoringUtil.getCpuAndMemoryData();
         cpuPerformanceService.save(cpuAndMemoryData.toEntity());
     }
 
     @Async
-    @Scheduled(fixedRate = 5000, initialDelay = 10 * 1000)
+    @Scheduled(cron = "${performance.monitoring.gpu.cron}")
     public void getGpuPerformance() {
         if (performanceMonitoringUtil.hasNvidiaGPU) {
             List<GPUPerformanceDto> nvidiaGpuData = performanceMonitoringUtil.getNvidiaGpuData();

@@ -68,3 +68,9 @@ logging:
     org.mybatis: ${logging.level.sql}
     com.baomidou.mybatisplus: ${logging.level.sql}
     com.sunnysunco: ${logging.level.sql}
+performance:
+  monitoring:
+    cpu:
+      cron: "0/5 * * * * ?"
+    gpu:
+      cron: "0/5 * * * * ?"
