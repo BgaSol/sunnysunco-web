@@ -43,7 +43,7 @@ const updatePasswordRef = ref<InstanceType<typeof UpdatePassword>>();
     <el-menu-item v-if="user.user?.department" @click="$router.push({name:'admin_home'})">
       <el-image v-if="user?.user?.department?.icon?.id" fit="contain"
                 :src="getImageUrl(user.user.department.icon.id as string)"
-                class="h-9 mt-auto mb-auto el-image-block"></el-image>
+                class="h-9 mt-auto mb-auto el-image-block el-image-w-auto"></el-image>
       <div v-if="user.user?.department?.name" class="title important-ml-4 font-bold font-size-5">
         {{ user.user?.department?.name }}
       </div>
