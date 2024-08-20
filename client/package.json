@@ -10,9 +10,11 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
     "@types/chroma-js": "^2.4.4",
     "@vueuse/core": "^10.11.0",
     "@vueuse/integrations": "^10.11.0",
+    "@vueuse/motion": "^2.2.3",
     "animate.css": "^4.1.1",
     "axios": "^1.7.2",
     "chroma-js": "^2.4.2",

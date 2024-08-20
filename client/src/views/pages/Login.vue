@@ -70,45 +70,42 @@ onMounted(() => {
   <div class='login'>
     <app-header></app-header>
     <el-row class="mt-10vw">
-      <transition enter-active-class="animate__animated animate__backInRight"
-                  leave-active-class="animate__animated animate__backOutLeft"
-                  mode="out-in">
-        <el-col v-show="!pageLoading"
-                :lg="{span:5,offset:13}"
-                :md="{span:6,offset:12}"
-                :sm="{span:10,offset:7}"
-                :xl="{span:4,offset:15}"
-                :xs="{span:12,offset:5}">
-          <el-form ref="formRef" :model='loginDto' class='login-form'>
-            <el-form-item>
-              <div class='title'>用户登录</div>
-            </el-form-item>
-            <el-form-item :error="loginDtoErr.username">
-              <el-input v-model='loginDto.username' placeholder='请输入用户名'
-                        @keyup.enter.native='login'>
-              </el-input>
-            </el-form-item>
-            <el-form-item :error="loginDtoErr.password">
-              <el-input v-model='loginDto.password' placeholder='请输入密码' show-password
-                        type='password'
-                        @keyup.enter.native='login'>
-              </el-input>
-            </el-form-item>
-            <el-form-item :error="loginDtoErr.verificationCode">
-              <el-input v-model="loginDto.verificationCode" placeholder="请输入验证码" @keyup.enter.native='login'>
-                <template #append>
-                  <el-image fit="fill" :src="imageBase64" class="el-image-block cursor-pointer" @click="getCaptcha"></el-image>
-                </template>
-              </el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button :loading='loading' type='primary' @click='login'>
-                登录
-              </el-button>
-            </el-form-item>
-          </el-form>
-        </el-col>
-      </transition>
+      <el-col v-motion-roll-bottom :duration="600" v-show="!pageLoading"
+              :lg="{span:5,offset:13}"
+              :md="{span:6,offset:12}"
+              :sm="{span:10,offset:7}"
+              :xl="{span:4,offset:15}"
+              :xs="{span:12,offset:5}">
+        <el-form ref="formRef" :model='loginDto' class='login-form'>
+          <el-form-item>
+            <div class='title'>用户登录</div>
+          </el-form-item>
+          <el-form-item :error="loginDtoErr.username">
+            <el-input v-model='loginDto.username' placeholder='请输入用户名'
+                      @keyup.enter.native='login'>
+            </el-input>
+          </el-form-item>
+          <el-form-item :error="loginDtoErr.password">
+            <el-input v-model='loginDto.password' placeholder='请输入密码' show-password
+                      type='password'
+                      @keyup.enter.native='login'>
+            </el-input>
+          </el-form-item>
+          <el-form-item :error="loginDtoErr.verificationCode">
+            <el-input v-model="loginDto.verificationCode" placeholder="请输入验证码" @keyup.enter.native='login'>
+              <template #append>
+                <el-image fit="fill" :src="imageBase64" class="el-image-block cursor-pointer"
+                          @click="getCaptcha"></el-image>
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button :loading='loading' type='primary' @click='login'>
+              登录
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
     </el-row>
   </div>
 </template>
