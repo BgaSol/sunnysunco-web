@@ -49,7 +49,7 @@ const updatePasswordRef = ref<InstanceType<typeof UpdatePassword>>();
       </div>
     </el-menu-item>
     <div class="flex-1 flex-row flex flex-items-center ml-20px">
-      <el-breadcrumb separator-icon='ArrowRight'>
+      <el-breadcrumb>
         <transition-group enter-active-class="animate__animated animate__fadeInRight">
           <el-breadcrumb-item v-for='breadcrumb in activeMenuList' :key='breadcrumb.id'
                               :to='breadcrumb.routeName && {name:breadcrumb.routeName}' replace>
