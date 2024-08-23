@@ -20,7 +20,7 @@ const icon = computed({
   <el-select v-model='icon' :placeholder='props.placeholder' class='w-100 icon-selector'
              popper-class='icon-selector'>
     <el-option
-        v-for='name in icons.elIcons'
+        v-for='name in icons.icons'
         :key='name'
         :label='name'
         :value='name'>

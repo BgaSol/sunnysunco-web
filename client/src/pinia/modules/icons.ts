@@ -3,9 +3,12 @@ import {ref} from 'vue';
 
 export const useIcons = defineStore('icons', () => {
 
-    const elIcons = ref<string[]>([]);
-    const setElIcons = (icons: string[]) => {
-        elIcons.value = icons;
+    const icons = ref<string[]>([]);
+    const setIcons = (iconsData: string[]) => {
+        icons.value = iconsData;
     };
-    return {elIcons, setElIcons};
+    const addIcon = (...icon: string[]) => {
+        icons.value.push(...icon);
+    }
+    return {icons, setIcons, addIcon};
 });

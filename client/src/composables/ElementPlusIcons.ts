@@ -6,7 +6,7 @@ const ElementPlusIcons: Plugin = {
     install(app) {
         const icons = useIcons();
         const entries = Object.entries(ElementPlusIconsVue);
-        icons.setElIcons(entries.map(([key]) => key))
+        icons.addIcon(...entries.map(([key]) => key))
         for (const [key, component] of entries) {
             app.component(key, component);
         }
