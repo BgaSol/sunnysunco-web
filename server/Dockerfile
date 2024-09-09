@@ -18,6 +18,6 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # 设置应用的入口点
-ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=prod"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
 # 暴露应用使用的端口
 EXPOSE 8080

@@ -12,9 +12,9 @@ server:
 spring:
   redis:
     database: 0
-    host: redis
+    host: 127.0.0.1
     port: 6379
-    password: sunnysunco
+    password: redis123
     jedis:
       pool:
         enabled: on
@@ -24,9 +24,9 @@ spring:
         min-idle: 20 # 连接池中的最小空闲连接
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://pgsql:5432/sunnysunco
-    username: sunnysunco
-    password: sunnysunco
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres123
     hikari:
       #      pool-name: MyHikariCP # 连接池名称
       minimum-idle: 50 # 最小空闲连接数
@@ -46,23 +46,23 @@ spring:
       max-request-size: 3GB
 springdoc:
   swagger-ui:
-    enabled: false # 是否启用swagger-ui
+    enabled: true # 是否启用swagger-ui
     path: /swagger-ui # swagger-ui地址
   api-docs:
-    enabled: false # 是否启用swagger-api
+    enabled: true # 是否启用swagger-api
     path: /api-docs # swagger-api地址
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #mybatis日志记录器
 minio:
-  url: http://minio:9000
-  username: sunnysunco
-  password: sunnysunco
-  bucket: sunnysunco
+  url: http://localhost:9000
+  username: minio
+  password: minio123
+  bucket: miniobucket
 logging:
   level:
     root: info
-    sql: info #是否打印sql
+    sql: debug #是否打印sql
     org.apache.ibatis: ${logging.level.sql}
     org.postgresql.jdbc: ${logging.level.sql}
     org.mybatis: ${logging.level.sql}
@@ -71,6 +71,6 @@ logging:
 performance:
   monitoring:
     cpu:
-      cron: "-"
+      cron: "0/5 * * * * ?"
     gpu:
-      cron: "-"
+      cron: "0/5 * * * * ?"
