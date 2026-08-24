@@ -14,6 +14,9 @@ body.admin-glass-theme {
   --glass-button-highlight: rgb(255 255 255 / 0.55);
   --glass-shadow: 0 14px 36px rgb(35 77 128 / 0.14);
   --glass-blur: 20px;
+  --card-background: rgb(248 252 255 / 0.9);
+  --card-header-background: rgb(235 245 255 / 0.84);
+  --card-hover-background: rgb(241 248 255 / 0.94);
   --dialog-background: rgb(231 243 255 / 0.78);
   --dialog-control-background: rgb(239 248 255 / 0.7);
   --dialog-border: rgb(var(--brand-rgb) / 0.32);
@@ -61,6 +64,9 @@ html.dark body.admin-glass-theme {
   --glass-border-subtle: rgb(96 165 250 / 0.16);
   --glass-button-highlight: rgb(255 255 255 / 0.12);
   --glass-shadow: 0 16px 40px rgb(0 0 0 / 0.28);
+  --card-background: rgb(16 38 65 / 0.92);
+  --card-header-background: rgb(10 39 69 / 0.86);
+  --card-hover-background: rgb(19 48 80 / 0.96);
   --dialog-background: rgb(9 31 56 / 0.84);
   --dialog-control-background: rgb(10 44 78 / 0.74);
   --dialog-border: rgb(96 165 250 / 0.4);
@@ -464,7 +470,7 @@ body.admin-glass-theme .glass-menu-popper.el-popper {
 }
 
 body.admin-glass-theme .el-card {
-  --el-card-bg-color: color-mix(in srgb, var(--glass-background-strong) 72%, transparent);
+  --el-card-bg-color: var(--card-background);
   --el-card-border-color: var(--glass-border-subtle);
   color: var(--app-text-primary);
   border-color: color-mix(in srgb, var(--el-color-primary) 16%, var(--glass-border-color));
@@ -479,7 +485,7 @@ body.admin-glass-theme .el-card {
 body.admin-glass-theme .el-card__header {
   color: var(--app-text-primary);
   border-bottom-color: color-mix(in srgb, var(--el-color-primary) 18%, var(--glass-border-subtle));
-  background: color-mix(in srgb, var(--glass-control-background) 76%, rgb(var(--brand-rgb) / 0.12));
+  background: var(--card-header-background);
 }
 
 body.admin-glass-theme .el-card__body {
@@ -495,14 +501,14 @@ body.admin-glass-theme .el-card.is-always-shadow {
 body.admin-glass-theme .el-card.is-hover-shadow:hover,
 body.admin-glass-theme .el-card.glass-card--interactive:hover {
   border-color: color-mix(in srgb, var(--el-color-primary) 42%, var(--glass-border-color));
-  background: color-mix(in srgb, var(--glass-background-strong) 78%, rgb(var(--brand-rgb) / 0.14));
+  background: var(--card-hover-background);
   box-shadow:
     0 16px 36px rgba(35, 77, 128, 0.18),
     0 1px 0 var(--glass-button-highlight) inset;
 }
 
 html.dark body.admin-glass-theme .el-card {
-  --el-card-bg-color: color-mix(in srgb, var(--glass-background-strong) 76%, transparent);
+  --el-card-bg-color: var(--card-background);
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.24),
     0 1px 0 var(--glass-button-highlight) inset;
