@@ -1,3 +1,98 @@
+body.admin-glass-theme {
+  color-scheme: light;
+  --brand-rgb: 59 130 246;
+  --cyan-rgb: 34 211 238;
+  --app-background: #eef4fb;
+  --app-background-accent: rgb(var(--brand-rgb) / 0.22);
+  --app-background-secondary: rgb(var(--cyan-rgb) / 0.08);
+  --app-grid-color: rgb(39 91 151 / 0.08);
+  --glass-background: rgb(255 255 255 / 0.62);
+  --glass-background-strong: rgb(248 252 255 / 0.82);
+  --glass-control-background: rgb(235 245 255 / 0.7);
+  --glass-border-color: rgb(255 255 255 / 0.86);
+  --glass-border-subtle: rgb(var(--brand-rgb) / 0.2);
+  --glass-button-highlight: rgb(255 255 255 / 0.55);
+  --glass-shadow: 0 14px 36px rgb(35 77 128 / 0.14);
+  --glass-blur: 20px;
+  --dialog-background: rgb(231 243 255 / 0.78);
+  --dialog-control-background: rgb(239 248 255 / 0.7);
+  --dialog-border: rgb(var(--brand-rgb) / 0.32);
+  --dialog-accent-soft: rgb(var(--brand-rgb) / 0.08);
+  --app-text-primary: #15263b;
+  --app-text-secondary: #60758b;
+
+  --el-color-primary: #3b82f6;
+  --el-color-primary-light-3: #6ea3f9;
+  --el-color-primary-light-5: #8fb9fa;
+  --el-color-primary-light-7: #b4d0fc;
+  --el-color-primary-light-8: #cbe0fd;
+  --el-color-primary-light-9: #e5f0ff;
+  --el-color-primary-dark-2: #2563eb;
+  --el-color-success: #16a34a;
+  --el-color-warning: #d97706;
+  --el-color-danger: #e11d48;
+  --el-color-error: #e11d48;
+  --el-color-info: #64748b;
+  --el-bg-color: #eef4fb;
+  --el-bg-color-overlay: rgb(248 252 255 / 0.82);
+  --el-fill-color-blank: transparent;
+  --el-fill-color-light: rgb(var(--brand-rgb) / 0.08);
+  --el-fill-color-lighter: rgb(var(--brand-rgb) / 0.05);
+  --el-border-color: rgb(var(--brand-rgb) / 0.22);
+  --el-border-color-light: rgb(var(--brand-rgb) / 0.15);
+  --el-border-color-lighter: rgb(var(--brand-rgb) / 0.1);
+  --el-text-color-primary: #15263b;
+  --el-text-color-regular: #304b68;
+  --el-text-color-secondary: #60758b;
+}
+
+html.dark body.admin-glass-theme {
+  color-scheme: dark;
+  --brand-rgb: 96 165 250;
+  --cyan-rgb: 34 211 238;
+  --app-background: #07111f;
+  --app-background-accent: rgb(var(--brand-rgb) / 0.24);
+  --app-background-secondary: rgb(var(--cyan-rgb) / 0.1);
+  --app-grid-color: rgb(148 190 235 / 0.07);
+  --glass-background: rgb(10 26 46 / 0.72);
+  --glass-background-strong: rgb(16 38 65 / 0.86);
+  --glass-control-background: rgb(10 39 69 / 0.76);
+  --glass-border-color: rgb(96 165 250 / 0.26);
+  --glass-border-subtle: rgb(96 165 250 / 0.16);
+  --glass-button-highlight: rgb(255 255 255 / 0.12);
+  --glass-shadow: 0 16px 40px rgb(0 0 0 / 0.28);
+  --dialog-background: rgb(9 31 56 / 0.84);
+  --dialog-control-background: rgb(10 44 78 / 0.74);
+  --dialog-border: rgb(96 165 250 / 0.4);
+  --dialog-accent-soft: rgb(var(--brand-rgb) / 0.13);
+  --app-text-primary: #eff7ff;
+  --app-text-secondary: #99afc4;
+
+  --el-color-primary: #60a5fa;
+  --el-color-primary-light-3: #82b5fb;
+  --el-color-primary-light-5: #9ec8fc;
+  --el-color-primary-light-7: #bad9fd;
+  --el-color-primary-light-8: #cbe5fe;
+  --el-color-primary-light-9: #dceeff;
+  --el-color-primary-dark-2: #3b82f6;
+  --el-color-success: #4ade80;
+  --el-color-warning: #fbbf24;
+  --el-color-danger: #fb7185;
+  --el-color-error: #fb7185;
+  --el-color-info: #94a3b8;
+  --el-bg-color: #07111f;
+  --el-bg-color-overlay: rgb(16 38 65 / 0.86);
+  --el-fill-color-blank: transparent;
+  --el-fill-color-light: rgb(var(--brand-rgb) / 0.12);
+  --el-fill-color-lighter: rgb(var(--brand-rgb) / 0.08);
+  --el-border-color: rgb(var(--brand-rgb) / 0.26);
+  --el-border-color-light: rgb(var(--brand-rgb) / 0.18);
+  --el-border-color-lighter: rgb(var(--brand-rgb) / 0.12);
+  --el-text-color-primary: #eff7ff;
+  --el-text-color-regular: #c7d9eb;
+  --el-text-color-secondary: #99b3cc;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -6,13 +101,475 @@ body {
 }
 
 html {
-  font-family: "Open Sans";
+  font-family: "Open Sans", "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
 }
 
+html,
+body,
+#app {
+  width: 100%;
+  min-height: 100%;
+}
+
+body.admin-glass-theme,
+body.admin-glass-theme * {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--brand-rgb) / 0.58) transparent;
+}
+
+body.admin-glass-theme *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body.admin-glass-theme *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body.admin-glass-theme *::-webkit-scrollbar-thumb {
+  min-height: 34px;
+  background: rgb(var(--brand-rgb) / 0.5);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+body.admin-glass-theme *::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--brand-rgb) / 0.78);
+  background-clip: padding-box;
+}
+
+body.admin-glass-theme *::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+html.dark body.admin-glass-theme,
+html.dark body.admin-glass-theme * {
+  scrollbar-color: rgb(var(--brand-rgb) / 0.64) transparent;
+}
+
+html.dark body.admin-glass-theme *::-webkit-scrollbar-thumb {
+  background: rgb(var(--brand-rgb) / 0.54);
+  background-clip: padding-box;
+}
+
+html.dark body.admin-glass-theme *::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--brand-rgb) / 0.84);
+  background-clip: padding-box;
+}
+
+body.admin-glass-theme .app-backdrop {
+  isolation: isolate;
+  background-color: var(--app-background);
+  background-image:
+    linear-gradient(125deg, var(--app-background-accent), transparent 38%),
+    linear-gradient(305deg, var(--app-background-secondary), transparent 34%);
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--app-grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--app-grid-color) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(135deg, #000 0%, rgba(0, 0, 0, 0.74) 42%, transparent 86%);
+  }
+}
+
+body.admin-glass-theme .glass-surface {
+  background: var(--glass-background);
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  body.admin-glass-theme .glass-surface,
+  body.admin-glass-theme .el-dialog,
+  body.admin-glass-theme .el-message-box,
+  body.admin-glass-theme .el-drawer {
+    background: var(--glass-background-strong);
+  }
+}
+
+// Keep data-heavy controls opaque enough to remain readable over the glass shell.
+body.admin-glass-theme .admin-app {
+  .el-menu {
+    --el-menu-bg-color: transparent;
+    --el-menu-hover-bg-color: rgb(var(--brand-rgb) / 0.11);
+    --el-menu-border-color: transparent;
+    background: transparent;
+    border: 0;
+  }
+
+  .el-table {
+    --el-table-bg-color: transparent;
+    --el-table-tr-bg-color: transparent;
+    --el-table-header-bg-color: rgba(255, 255, 255, 0.36);
+    --el-table-row-hover-bg-color: rgb(var(--brand-rgb) / 0.09);
+    --el-table-border-color: var(--glass-border-subtle);
+    background: transparent;
+  }
+
+  .el-input__wrapper,
+  .el-select__wrapper,
+  .el-textarea__inner {
+    background: var(--glass-control-background);
+    box-shadow: 0 0 0 1px var(--glass-border-subtle) inset;
+  }
+}
+
+body.admin-glass-theme .el-checkbox {
+  --el-checkbox-bg-color: color-mix(in srgb, var(--glass-control-background) 56%, rgb(var(--brand-rgb) / 0.18));
+  --el-checkbox-input-border: 1px solid color-mix(in srgb, var(--el-color-primary) 68%, var(--glass-border-color));
+  --el-checkbox-input-border-color-hover: var(--el-color-primary);
+  --el-checkbox-checked-bg-color: var(--el-color-primary);
+  --el-checkbox-checked-input-border-color: var(--el-color-primary);
+  --el-checkbox-checked-text-color: var(--el-color-primary);
+}
+
+body.admin-glass-theme .el-checkbox__inner {
+  border-color: color-mix(in srgb, var(--el-color-primary) 68%, var(--glass-border-color));
+  box-shadow: 0 1px 0 var(--glass-button-highlight) inset;
+}
+
+body.admin-glass-theme .el-checkbox.is-bordered {
+  background: color-mix(in srgb, var(--glass-control-background) 62%, rgb(var(--brand-rgb) / 0.14));
+  border-color: color-mix(in srgb, var(--el-color-primary) 48%, var(--glass-border-color));
+  box-shadow: 0 1px 0 var(--glass-button-highlight) inset;
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+}
+
+body.admin-glass-theme .el-checkbox__input.is-checked .el-checkbox__inner,
+body.admin-glass-theme .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  box-shadow: 0 0 12px color-mix(in srgb, var(--el-color-primary) 48%, transparent);
+}
+
+body.admin-glass-theme .el-switch {
+  --el-switch-on-color: var(--el-color-primary);
+  --el-switch-off-color: rgb(var(--brand-rgb) / 0.16);
+  --el-switch-border-color: color-mix(in srgb, var(--el-color-primary) 66%, var(--glass-border-color));
+}
+
+body.admin-glass-theme .el-switch__core {
+  border-width: 1px;
+  box-shadow:
+    0 1px 0 var(--glass-button-highlight) inset,
+    0 0 0 1px color-mix(in srgb, var(--el-color-primary) 16%, transparent);
+}
+
+body.admin-glass-theme .el-switch__action {
+  background: var(--glass-control-background);
+  border: 1px solid color-mix(in srgb, var(--el-color-primary) 42%, var(--glass-border-color));
+  box-shadow: 0 1px 3px rgba(14, 51, 94, 0.22);
+}
+
+body.admin-glass-theme .el-switch.is-checked .el-switch__core {
+  border-color: var(--el-color-primary);
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--el-color-primary) 34%, transparent),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+body.admin-glass-theme .el-tree {
+  --el-tree-node-hover-bg-color: rgb(var(--brand-rgb) / 0.1);
+  --el-tree-text-color: var(--app-text-primary);
+  --el-tree-expand-icon-color: var(--app-text-secondary);
+  background: transparent;
+  color: var(--app-text-primary);
+}
+
+body.admin-glass-theme .el-tree-node__content {
+  margin: 1px 4px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: background-color var(--el-transition-duration-fast), border-color var(--el-transition-duration-fast);
+}
+
+body.admin-glass-theme .el-tree-node__content:hover,
+body.admin-glass-theme .el-tree-node:focus > .el-tree-node__content {
+  background: rgb(var(--brand-rgb) / 0.1);
+  border-color: color-mix(in srgb, var(--el-color-primary) 22%, transparent);
+}
+
+body.admin-glass-theme .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+  color: var(--el-color-primary);
+  background: rgb(var(--brand-rgb) / 0.17);
+  border-color: color-mix(in srgb, var(--el-color-primary) 36%, transparent);
+}
+
+body.admin-glass-theme .el-tree .el-checkbox {
+  background: transparent;
+}
+
+body.admin-glass-theme .form-item-tree {
+  background: transparent;
+  border-color: var(--glass-border-subtle);
+}
+
+html.dark body.admin-glass-theme .admin-app .el-table {
+  --el-table-header-bg-color: rgba(255, 255, 255, 0.045);
+  --el-table-row-hover-bg-color: rgb(var(--brand-rgb) / 0.12);
+}
+
+body.admin-glass-theme .el-dialog,
+body.admin-glass-theme .el-message-box,
+body.admin-glass-theme .el-drawer {
+  background: var(--glass-background-strong);
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+}
+
+body.admin-glass-theme .el-overlay {
+  background-color: rgba(7, 16, 29, 0.28);
+  backdrop-filter: blur(5px) saturate(105%);
+  -webkit-backdrop-filter: blur(5px) saturate(105%);
+}
+
+html.dark body.admin-glass-theme .el-overlay {
+  background-color: rgba(1, 6, 13, 0.5);
+}
+
+body.admin-glass-theme .el-dialog {
+  --el-dialog-bg-color: transparent;
+  --el-dialog-box-shadow: var(--glass-shadow);
+  --el-dialog-border-radius: 8px;
+  max-width: calc(100vw - 32px);
+  padding: 0;
+  color: var(--app-text-primary);
+  background: var(--dialog-background);
+  border: 1px solid var(--dialog-border);
+  box-shadow:
+    0 22px 56px rgba(24, 53, 91, 0.18),
+    0 1px 0 var(--glass-button-highlight) inset;
+  overflow: hidden;
+}
+
+body.admin-glass-theme .el-dialog__header {
+  position: relative;
+  margin: 0;
+  padding: 20px 52px 16px 22px;
+  border-bottom: 1px solid var(--glass-border-subtle);
+  background: var(--dialog-accent-soft);
+}
+
+body.admin-glass-theme .el-dialog__header::after {
+  position: absolute;
+  left: 22px;
+  bottom: -1px;
+  width: 42px;
+  height: 2px;
+  content: "";
+  border-radius: 2px;
+  background: var(--el-color-primary);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--el-color-primary) 56%, transparent);
+}
+
+body.admin-glass-theme .el-dialog__title {
+  color: var(--app-text-primary);
+  font-weight: 700;
+}
+
+body.admin-glass-theme .el-dialog__headerbtn {
+  top: 12px;
+  right: 12px;
+  border-radius: 6px;
+  background: transparent;
+  transition: background-color var(--el-transition-duration-fast), color var(--el-transition-duration-fast);
+}
+
+body.admin-glass-theme .el-dialog__headerbtn:hover {
+  background: rgb(var(--brand-rgb) / 0.12);
+}
+
+body.admin-glass-theme .el-dialog__body {
+  max-height: 70vh;
+  padding: 22px;
+  border: 0;
+  background: transparent;
+}
+
+body.admin-glass-theme .el-dialog__footer {
+  padding: 16px 22px 20px;
+  border-top: 1px solid var(--glass-border-subtle);
+  background: var(--dialog-accent-soft);
+}
+
+body.admin-glass-theme .el-dialog .el-input__wrapper,
+body.admin-glass-theme .el-dialog .el-select__wrapper,
+body.admin-glass-theme .el-dialog .el-textarea__inner {
+  color: var(--app-text-primary);
+  background: var(--dialog-control-background);
+  box-shadow: 0 0 0 1px var(--dialog-border) inset;
+}
+
+body.admin-glass-theme .el-dialog .el-form-item__label {
+  color: var(--app-text-primary);
+  font-weight: 600;
+}
+
+body.admin-glass-theme .el-dialog .el-input__inner,
+body.admin-glass-theme .el-dialog .el-textarea__inner {
+  color: var(--app-text-primary);
+}
+
+body.admin-glass-theme .el-dialog .el-input__inner::placeholder,
+body.admin-glass-theme .el-dialog .el-textarea__inner::placeholder {
+  color: var(--app-text-secondary);
+}
+
+body.admin-glass-theme .glass-menu-popper.el-popper {
+  padding: 4px;
+  background: var(--glass-background-strong);
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+
+  .el-popper__arrow::before {
+    background: var(--glass-background-strong);
+    border-color: var(--glass-border-color);
+  }
+
+  .el-menu--popup {
+    min-width: 168px;
+    padding: 4px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .el-menu-item {
+    height: 40px;
+    margin: 3px 0;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--glass-control-background) 76%, rgb(var(--brand-rgb) / 0.16));
+
+    &:hover,
+    &:focus {
+      background: color-mix(in srgb, var(--glass-control-background) 58%, rgb(var(--brand-rgb) / 0.4));
+      border-color: color-mix(in srgb, var(--el-color-primary) 36%, var(--glass-border-color));
+    }
+  }
+}
+
+body.admin-glass-theme .el-card {
+  --el-card-bg-color: color-mix(in srgb, var(--glass-background-strong) 72%, transparent);
+  --el-card-border-color: var(--glass-border-subtle);
+  color: var(--app-text-primary);
+  border-color: color-mix(in srgb, var(--el-color-primary) 16%, var(--glass-border-color));
+  background: var(--el-card-bg-color);
+  box-shadow:
+    0 10px 26px rgba(35, 77, 128, 0.1),
+    0 1px 0 var(--glass-button-highlight) inset;
+  backdrop-filter: blur(16px) saturate(135%);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+}
+
+body.admin-glass-theme .el-card__header {
+  color: var(--app-text-primary);
+  border-bottom-color: color-mix(in srgb, var(--el-color-primary) 18%, var(--glass-border-subtle));
+  background: color-mix(in srgb, var(--glass-control-background) 76%, rgb(var(--brand-rgb) / 0.12));
+}
+
+body.admin-glass-theme .el-card__body {
+  color: var(--app-text-primary);
+}
+
+body.admin-glass-theme .el-card.is-always-shadow {
+  box-shadow:
+    0 14px 32px rgba(35, 77, 128, 0.14),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+body.admin-glass-theme .el-card.is-hover-shadow:hover,
+body.admin-glass-theme .el-card.glass-card--interactive:hover {
+  border-color: color-mix(in srgb, var(--el-color-primary) 42%, var(--glass-border-color));
+  background: color-mix(in srgb, var(--glass-background-strong) 78%, rgb(var(--brand-rgb) / 0.14));
+  box-shadow:
+    0 16px 36px rgba(35, 77, 128, 0.18),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+html.dark body.admin-glass-theme .el-card {
+  --el-card-bg-color: color-mix(in srgb, var(--glass-background-strong) 76%, transparent);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.24),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+// Preserve Element Plus semantic colors while giving every button a glass surface.
+body.admin-glass-theme .el-button {
+  background-color: color-mix(in srgb, var(--el-button-bg-color) 80%, transparent);
+  border-color: color-mix(in srgb, var(--el-button-border-color) 82%, var(--glass-button-highlight));
+  box-shadow:
+    0 5px 14px rgba(26, 49, 56, 0.1),
+    0 1px 0 var(--glass-button-highlight) inset;
+  backdrop-filter: blur(12px) saturate(135%);
+  -webkit-backdrop-filter: blur(12px) saturate(135%);
+  transition:
+    background-color var(--el-transition-duration-fast),
+    border-color var(--el-transition-duration-fast),
+    box-shadow var(--el-transition-duration-fast),
+    transform var(--el-transition-duration-fast);
+}
+
+body.admin-glass-theme .el-button:hover,
+body.admin-glass-theme .el-button:focus-visible {
+  background-color: color-mix(in srgb, var(--el-button-hover-bg-color) 88%, transparent);
+  border-color: color-mix(in srgb, var(--el-button-hover-border-color) 92%, var(--glass-button-highlight));
+  box-shadow:
+    0 7px 18px rgba(26, 49, 56, 0.14),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+body.admin-glass-theme .el-button:active {
+  background-color: color-mix(in srgb, var(--el-button-active-bg-color) 92%, transparent);
+  border-color: var(--el-button-active-border-color);
+  box-shadow:
+    0 2px 8px rgba(26, 49, 56, 0.12),
+    0 1px 0 var(--glass-button-highlight) inset;
+  transform: translateY(1px);
+}
+
+body.admin-glass-theme .el-button:where(:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(.el-button--info)) {
+  background-color: color-mix(in srgb, var(--glass-control-background) 78%, rgb(var(--brand-rgb) / 0.3));
+  border-color: color-mix(in srgb, var(--el-color-primary) 30%, var(--glass-border-color));
+}
+
+body.admin-glass-theme .el-button:where(:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(.el-button--info)):hover,
+body.admin-glass-theme .el-button:where(:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(.el-button--info)):focus-visible {
+  background-color: color-mix(in srgb, var(--glass-control-background) 62%, rgb(var(--brand-rgb) / 0.48));
+  border-color: color-mix(in srgb, var(--el-color-primary) 48%, var(--glass-border-color));
+}
+
+body.admin-glass-theme .el-button.is-disabled,
+body.admin-glass-theme .el-button.is-disabled:hover {
+  background-color: color-mix(in srgb, var(--el-button-disabled-bg-color) 52%, transparent);
+  border-color: color-mix(in srgb, var(--el-button-disabled-border-color) 55%, transparent);
+  box-shadow: none;
+  transform: none;
+}
+
+body.admin-glass-theme .el-button.is-text,
+body.admin-glass-theme .el-button.is-link {
+  background-color: color-mix(in srgb, var(--el-button-bg-color) 26%, transparent);
+  border-color: transparent;
+  box-shadow: none;
+}
+
 // 后台标准页面布局
-.main {
+body.admin-glass-theme .main {
   width: 100%;
   height: 100%;
   display: flex;
@@ -70,7 +627,7 @@ html {
 }
 
 // 添加修改表单中 el-form-item 内部放置的 el-tree 统一样式
-.form-item-tree {
+body.admin-glass-theme .form-item-tree {
   border: var(--el-border);
   border-radius: var(--el-border-radius-base);
   width: calc(100% - 2px);
@@ -79,27 +636,25 @@ html {
 }
 
 // 添加修改表单中 el-form-item 内部放置的 el-tree 统一样式
-.is-error {
+body.admin-glass-theme .is-error {
   .form-item-tree {
     border-color: var(--el-color-danger);
   }
 }
 
 // 弹出层统一样式
-.el-dialog__body {
-  padding-top: 5px;
-  // 顶部阴影
-  border: var(--el-border);
-  border-radius: var(--el-border-radius-base);
+body.admin-glass-theme .el-dialog__body {
+  padding-top: 12px;
+  border-top: 1px solid var(--glass-border-subtle);
+  border-bottom: 1px solid var(--glass-border-subtle);
   max-height: 70vh;
   overflow: auto;
-  padding-bottom: 5px;
-  padding-right: 5px;
-  box-shadow: var(--el-box-shadow);
+  padding-bottom: 12px;
+  box-shadow: none;
 }
 
 // 上传图片表单 统一样式
-.dialog-form-img-upload {
+body.admin-glass-theme .dialog-form-img-upload {
   .el-upload {
     width: calc(100% - 2px);
     border: 1px dashed var(--el-border-color);
@@ -127,6 +682,76 @@ html {
       text-align: center;
     }
   }
+}
+
+body.admin-glass-theme .el-upload-dragger {
+  background: color-mix(in srgb, var(--glass-control-background) 72%, rgb(var(--brand-rgb) / 0.12));
+  border: 1px dashed color-mix(in srgb, var(--el-color-primary) 52%, var(--glass-border-color));
+  box-shadow:
+    0 1px 0 var(--glass-button-highlight) inset,
+    0 0 0 1px color-mix(in srgb, var(--el-color-primary) 10%, transparent);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  transition:
+    border-color var(--el-transition-duration-fast),
+    background-color var(--el-transition-duration-fast),
+    box-shadow var(--el-transition-duration-fast);
+}
+
+body.admin-glass-theme .el-upload-dragger:hover,
+body.admin-glass-theme .el-upload-dragger:focus,
+body.admin-glass-theme .el-upload-dragger.is-dragover {
+  background: color-mix(in srgb, var(--glass-control-background) 56%, rgb(var(--brand-rgb) / 0.3));
+  border-color: var(--el-color-primary);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--el-color-primary) 34%, transparent),
+    0 0 22px color-mix(in srgb, var(--el-color-primary) 18%, transparent),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+body.admin-glass-theme .el-upload-dragger .el-icon--upload {
+  color: var(--el-color-primary);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--el-color-primary) 28%, transparent));
+}
+
+body.admin-glass-theme .el-upload-dragger .el-upload__text {
+  color: var(--app-text-primary);
+}
+
+body.admin-glass-theme .el-upload-dragger .el-upload__text em {
+  color: var(--el-color-primary);
+}
+
+body.admin-glass-theme .dialog-form-img-upload .el-upload {
+  background: color-mix(in srgb, var(--glass-control-background) 72%, rgb(var(--brand-rgb) / 0.12));
+  border: 1px dashed color-mix(in srgb, var(--el-color-primary) 52%, var(--glass-border-color));
+  box-shadow: 0 1px 0 var(--glass-button-highlight) inset;
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+}
+
+body.admin-glass-theme .dialog-form-img-upload .el-upload:hover {
+  background: color-mix(in srgb, var(--glass-control-background) 56%, rgb(var(--brand-rgb) / 0.3));
+  border-color: var(--el-color-primary);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--el-color-primary) 34%, transparent),
+    0 0 22px color-mix(in srgb, var(--el-color-primary) 18%, transparent),
+    0 1px 0 var(--glass-button-highlight) inset;
+}
+
+body.admin-glass-theme .dialog-form-img-upload .el-icon.dialog-form-img-uploader-icon {
+  color: var(--el-color-primary);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--el-color-primary) 28%, transparent));
+}
+
+body.admin-glass-theme .el-upload-list__item {
+  background: color-mix(in srgb, var(--glass-control-background) 68%, rgb(var(--brand-rgb) / 0.1));
+  border-color: color-mix(in srgb, var(--el-color-primary) 28%, var(--glass-border-subtle));
+}
+
+body.admin-glass-theme .el-upload-list__item:hover,
+body.admin-glass-theme .el-upload-list__item:focus-within {
+  background: color-mix(in srgb, var(--glass-control-background) 54%, rgb(var(--brand-rgb) / 0.24));
 }
 
 // 处理el-image的图片样式
